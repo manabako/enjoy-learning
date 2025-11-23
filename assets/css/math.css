@@ -92,9 +92,10 @@
   gap: .5rem;
 }
 .tenkey .tk {
+  color: var(--text);
   padding: .6rem;
   border-radius: 8px;
-  background: rgba(15,23,42,0.04);
+  background: var(--input-button-bg);
   border: none;
   font-size: 1.1rem;
   cursor: pointer;
