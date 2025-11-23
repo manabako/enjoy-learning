@@ -76,6 +76,16 @@
   box-shadow: none;
 }
 
+.answer-input.touch-only {
+  caret-color: transparent; /* 念のためカーソルを非表示 */
+  cursor: default;
+  /* ユーザーにタップはテンキーを使うことを示す視覚ヒント */
+  background-image: linear-gradient(90deg, rgba(0,0,0,0.02), rgba(0,0,0,0));
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  padding-right: 2.2rem;
+}
+
 .tenkey {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

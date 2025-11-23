@@ -258,11 +258,10 @@
     const v = e.target.textContent;
     const input = el.answerInput;
     if (v === '⌫') {
-      // remove last character
+      // existing backspace logic...
       const selStart = input.selectionStart ?? input.value.length;
       const selEnd = input.selectionEnd ?? selStart;
       if (selStart !== selEnd) {
-        // if selection exists, remove selection
         const before = input.value.slice(0, selStart);
         const after = input.value.slice(selEnd);
         input.value = before + after;
@@ -273,61 +272,118 @@
     } else if (v === 'C') {
       input.value = '';
     } else if (v === '-') {
-      // allow '-' only at the start and only one leading minus
       if (!input.value.startsWith('-') && (input.selectionStart ?? 0) === 0) {
         input.value = '-' + input.value;
       } else {
         setMessage('マイナスは先頭でのみ入力できます', 900);
       }
     } else {
-      // append digit at cursor position (simple: append at end)
-      input.value += v;
+      // digit pressed
+      const digit = v;
+      // Prevent adding a digit after a single leading zero (allow only "0")
+      const cur = input.value;
+      // consider "-0" case too
+      if (cur === '0' || cur === '-0') {
+        setMessage('先頭が0のときは別の数字を入力できません', 900);
+        input.focus();
+        return;
+      }
+      // If selection exists, insert at cursor; otherwise append
+      const selStart = input.selectionStart ?? input.value.length;
+      const selEnd = input.selectionEnd ?? selStart;
+      if (selStart !== selEnd) {
+        const before = input.value.slice(0, selStart);
+        const after = input.value.slice(selEnd);
+        const newVal = before + digit + after;
+        // prevent creating leading-zero patterns like "01" or "-01"
+        if (/^-?0[0-9]/.test(newVal)) {
+          setMessage('先頭が0のときは別の数字を入力できません', 900);
+        } else {
+          input.value = newVal;
+          const pos = selStart + 1;
+          input.setSelectionRange(pos, pos);
+        }
+      } else {
+        // simple append
+        const newVal = input.value + digit;
+        if (/^-?0[0-9]/.test(newVal)) {
+          setMessage('先頭が0のときは別の数字を入力できません', 900);
+        } else {
+          input.value = newVal;
+        }
+      }
     }
     input.focus();
   }
 
+   function isTouchDevice() {
+    return ('ontouchstart' in window) ||
+           (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+           (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0);
+  }
+
   // init
   function init() {
+    const touchOnly = isTouchDevice();
+
+    if (touchOnly) {
+      // モバイル：ネイティブキーボードを起動させない（テンキーのみ）
+      el.answerInput.setAttribute('readonly', 'readonly');
+      el.answerInput.setAttribute('inputmode', 'none');
+      el.answerInput.classList.add('touch-only');
+      // タッチ開始でフォーカス移動やスクロール暴発を防ぐ
+      el.answerInput.addEventListener('touchstart', (e) => { e.preventDefault(); }, { passive: false });
+    } else {
+      // PC：キーボード入力を有効にする
+      el.answerInput.removeAttribute('readonly');
+      el.answerInput.setAttribute('inputmode', 'numeric');
+      el.answerInput.classList.remove('touch-only');
+
+      // キー入力の制御（マイナスは先頭のみ許可、Enter で送信）
+      el.answerInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { submitAnswer(); return; }
+        // 許可する制御キー
+        const allowedControls = ['Backspace','Delete','ArrowLeft','ArrowRight','Tab','Home','End'];
+        if (allowedControls.includes(e.key)) return;
+        // マイナスは先頭のみ
+        if (e.key === '-') {
+          const selStart = el.answerInput.selectionStart ?? 0;
+          if (!(selStart === 0 && !el.answerInput.value.startsWith('-'))) {
+            e.preventDefault();
+            setMessage('マイナスは先頭でのみ入力できます', 900);
+          }
+          return;
+        }
+        // 数字のみ許可
+        if (/^[0-9]$/.test(e.key)) return;
+        // それ以外は禁止
+        e.preventDefault();
+      }, { passive: false });
+    }
+
+    // 共通初期化
     newProblem();
     startTimer();
     el.tenkey.addEventListener('click', onTenkeyClick);
     el.submitBtn.addEventListener('click', submitAnswer);
 
-    // keydown: prevent '-' except as first char
-    el.answerInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') { submitAnswer(); return; }
-      if (e.key === '-') {
-        const input = el.answerInput;
-        const selStart = input.selectionStart ?? 0;
-        // allow only if insertion point is at 0 and no leading '-'
-        if (!(selStart === 0 && !input.value.startsWith('-'))) {
-          e.preventDefault();
-          setMessage('マイナスは先頭でのみ入力できます', 900);
-        }
-      }
-    });
-
-    // sanitize pasted/typed input: remove '-' not at start and duplicate '-'s
+    // input のサニタイズ（既存の input イベントハンドラが無ければここで追加）
     el.answerInput.addEventListener('input', () => {
-      const input = el.answerInput;
-      let v = input.value;
+      let v = el.answerInput.value;
       const firstMinus = v.indexOf('-');
       if (firstMinus > 0) {
-        // remove all '-' (no leading minus originally)
         v = v.replace(/-/g, '');
-        input.value = v;
+        el.answerInput.value = v;
         setMessage('マイナスは先頭でのみ入力できます', 900);
       } else if (firstMinus === 0) {
-        // keep only the leading minus, remove others
         const rest = v.slice(1).replace(/-/g, '');
         if (rest.length !== v.slice(1).length) {
-          input.value = '-' + rest;
+          el.answerInput.value = '-' + rest;
           setMessage('マイナスは先頭でのみ入力できます', 900);
         }
       }
     });
 
-    // accessibility: focus input
     el.answerInput.focus();
   }
 
