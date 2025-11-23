@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>歴史ゲーム — 楽しく勉強する</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/stylesheet.css">
+    <link rel="stylesheet" href="../assets/css/history.css">
+  </head>
+  <body>
+    <header class="site-header container" role="banner">
+      <a class="site-brand" href="../index.html">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="site-title">楽しく勉強する</span>
+      </a>
+      <nav class="site-nav" role="navigation" aria-label="主要メニュー">
+        <a href="../index.html">トップ</a>
+        <a href="../index.html#">コース</a>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <section class="game-panel" aria-labelledby="history-title">
+        <h2 id="history-title" class="sr-only">歴史ゲーム</h2>
+
+        <div class="problem-area history-area">
+          <p class="kicker">出来事を古い順に並べ替えてください</p>
+          <ul id="list" class="list" aria-label="出来事の一覧"></ul>
+        </div>
+
+        <div class="answer-area">
+          <div class="controls">
+            <button id="answerBtn" class="btn">回答</button>
+            <button id="notesBtn" class="btn">解説</button>
+            <button id="nextBtn" class="btn">次へ</button>
+          </div>
+          <div class="result" id="result" aria-live="polite"></div>
+        </div>
+
+        <!-- ポップアップ -->
+        <div id="popupOverlay" class="popup-overlay" aria-hidden="true">
+          <div class="popup" id="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+            <div id="popupContainer"></div>
+            <button id="closeBtn" class="btn">閉じる</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer container" role="contentinfo">
+      <p>© 2025 楽しく勉強する</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script defer src="../assets/js/history.js"></script>
+  </body>
+</html>

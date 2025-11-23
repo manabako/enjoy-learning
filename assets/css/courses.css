@@ -1,0 +1,23 @@
+/* シンプルな courses ページ用スタイル（既存 stylesheet と併用） */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.card .card-actions {
+  margin-top: .75rem;
+  display: flex;
+  gap: .5rem;
+}
+.card .card-actions .btn {
+  padding: .45rem .75rem;
+  font-size: .95rem;
+}
+.hero-card.small {
+  padding: 1rem;
+  border-radius: 10px;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1rem;
+}

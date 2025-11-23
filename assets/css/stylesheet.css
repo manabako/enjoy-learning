@@ -1,0 +1,418 @@
+/* stylesheet.css
+    Modern, responsive base styles for a simple index.html
+*/
+
+/* Reset & box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html, body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* CSS variables (light/dark aware) */
+:root {
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --text: #0f172a;
+  --accent: #2563eb;
+  --accent-600: #1d4ed8;
+  --glass: rgba(255,255,255,0.65);
+  --radius: 12px;
+  --shadow-sm: 0 1px 2px rgba(16,24,40,0.05);
+  --shadow-md: 0 8px 24px rgba(16,24,40,0.08);
+  --container-width: 1100px;
+  --gap: 1.25rem;
+  --fw-regular: 400;
+  --fw-medium: 600;
+  --fw-bold: 700;
+  --transition: 200ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+     --bg: linear-gradient(180deg,#071022 0%, #071426 100%);
+     --card: rgba(8,12,20,0.6);
+     --muted: #9aa4bf;
+     --text: #e6eef8;
+     --accent: #3b82f6;
+     --accent-600: #2563eb;
+     --glass: rgba(255,255,255,0.04);
+     --shadow-sm: 0 1px 2px rgba(3,7,18,0.6);
+     --shadow-md: 0 12px 40px rgba(3,7,18,0.6);
+  }
+}
+
+/* Page base */
+body {
+  font-family: 'Noto Serif', serif, Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-weight: var(--fw-regular);
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100%;
+  -webkit-font-kerning: normal;
+  padding: 2rem;
+}
+
+/* Utility helpers */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Layout: header */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: var(--fw-bold);
+  font-size: 1.125rem;
+}
+.site-brand .logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-600));
+  box-shadow: var(--shadow-md);
+  display: inline-block;
+}
+
+/* Nav */
+.site-nav {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: .5rem .75rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: color var(--transition), background var(--transition), transform var(--transition);
+}
+.site-nav a:hover,
+.site-nav a:focus {
+  color: var(--text);
+  background: rgba(99,102,241,0.06);
+  transform: translateY(-2px);
+}
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 1.5rem;
+  align-items: start;
+  margin-bottom: 2rem;
+}
+.hero-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(6px);
+}
+.hero h1 {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  line-height: 1.05;
+  margin-bottom: .5rem;
+  letter-spacing: -0.01em;
+}
+.hero p {
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+/* CTA button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--accent);
+  color: white;
+  padding: .6rem 1rem;
+  border-radius: 10px;
+  font-weight: var(--fw-medium);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(37,99,235,0.18);
+  transition: transform var(--transition), box-shadow var(--transition), background .12s ease;
+  text-decoration: none;
+}
+.btn:hover,
+.btn:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(37,99,235,0.22);
+}
+.btn.secondary {
+  background: transparent;
+  border: 1px solid rgba(15,23,42,0.06);
+  color: var(--text);
+  box-shadow: none;
+}
+
+/* Main grid of cards */
+.main-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  margin-bottom: 2rem;
+}
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+  overflow: hidden;
+  min-height: 120px;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+.card h3 {
+  margin-bottom: .5rem;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.card p {
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+/* Grid helpers */
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+
+/* Forms */
+input[type="text"],
+input[type="search"],
+textarea,
+select {
+  width: 100%;
+  padding: .6rem .8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(15,23,42,0.06);
+  background: transparent;
+  font-size: .95rem;
+  color: var(--text);
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(37,99,235,0.6);
+  box-shadow: 0 6px 18px rgba(37,99,235,0.12);
+}
+
+/* Card list / article */
+.article {
+  display: grid;
+  gap: 1rem;
+}
+.article .meta {
+  color: var(--muted);
+  font-size: .875rem;
+}
+
+/* Footer */
+.site-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(15,23,42,0.04);
+  color: var(--muted);
+  font-size: .9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Small utilities */
+.kicker {
+  display: inline-block;
+  padding: .25rem .5rem;
+  background: rgba(37,99,235,0.08);
+  color: var(--accent-600);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: .78rem;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .25rem .5rem;
+  background: rgba(15,23,42,0.05);
+  border-radius: 999px;
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+/* Accessibility */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 3px solid rgba(37,99,235,0.18);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .hero {
+     grid-template-columns: 1fr;
+  }
+  .main-grid {
+     grid-template-columns: repeat(2, 1fr);
+  }
+  .site-header {
+     flex-direction: column;
+     align-items: stretch;
+  }
+}
+@media (max-width: 640px) {
+  body {
+     padding: 1rem;
+  }
+  .main-grid {
+     grid-template-columns: 1fr;
+  }
+  .site-nav {
+     justify-content: flex-end;
+     gap: .5rem;
+     flex-wrap: wrap;
+  }
+  .hero-card {
+     padding: 1rem;
+  }
+}
+
+/* Micro animation: fade-up on load with prefers-reduced-motion respect */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-fade-up {
+     transform: translateY(12px);
+     opacity: 0;
+     transition: transform 420ms cubic-bezier(.2,.9,.2,1), opacity 420ms cubic-bezier(.2,.9,.2,1);
+  }
+  .animate-fade-up.is-visible {
+     transform: translateY(0);
+     opacity: 1;
+  }
+}
+
+/* Visually hidden for accessibility */
+.sr-only {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* Small helpers */
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Example default classes for index.html elements */
+header, main, footer, nav, section {
+  display: block;
+}
+
+/* ---- Added/adjusted rules for index.html structure ---- */
+.contents ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: .5rem;
+}
+.contents ul li a {
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  color: var(--text);
+  text-decoration: none;
+  padding: .45rem .6rem;
+  border-radius: 8px;
+  transition: background var(--transition), transform var(--transition);
+}
+.contents ul li a:hover,
+.contents ul li a:focus {
+  background: rgba(37,99,235,0.06);
+  transform: translateY(-2px);
+}
+
+.card h3 i,
+.hero-card i,
+.contents ul li i {
+  color: var(--accent);
+  min-width: 22px;
+  font-size: 1.05rem;
+}
+
+/* small polish for mobile header */
+@media (max-width: 540px) {
+  .site-brand .site-title {
+    font-size: 1rem;
+  }
+  .site-brand .logo {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* カード内リンクの visited スタイルを無効化（色・下線を変えない） */
+.card .card-link,
+.card .card-link:link,
+.card .card-link:visited,
+.card .card-link:hover,
+.card .card-link:focus,
+.card .card-link:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ヒーローの人気科目など、同様にリンク装飾を保持したい領域があれば追加 */
+.contents ul li a,
+.contents ul li a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+

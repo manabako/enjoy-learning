@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>数学ゲーム — 楽しく勉強する</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.0/css/all.css">
+    <link rel="stylesheet" href="../assets/css/stylesheet.css">
+    <link rel="stylesheet" href="../assets/css/math.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  </head>
+  <body>
+    <header class="site-header container" role="banner">
+      <a class="site-brand" href="../index.html">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="site-title">楽しく勉強する</span>
+      </a>
+      <nav class="site-nav" role="navigation" aria-label="主要メニュー">
+        <a href="../index.html">トップ</a>
+        <a href="../index.html#">コース</a>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <!-- ゲームパネル -->
+      <section id="math-game" class="game-panel" aria-labelledby="game-title">
+        <h2 id="game-title" class="sr-only">数学ゲーム</h2>
+
+        <div class="game-top">
+          <div class="timer" title="残り時間">
+            <div id="timer-bar" class="timer-bar"></div>
+          </div>
+          <div class="timer-label">残り <span id="time-remaining">60</span>s</div>
+        </div>
+
+        <div class="problem-area" aria-live="polite">
+          <div class="problem-number">問題 <span id="problem-number">1</span></div>
+          <div id="formula" class="formula" aria-hidden="false"></div>
+        </div>
+
+        <div class="answer-area">
+          <input id="answer-input" class="answer-input" type="text" inputmode="numeric" aria-label="答えを入力" autocomplete="off" />
+          <div id="tenkey" class="tenkey" role="application" aria-label="テンキー">
+            <button class="tk">7</button><button class="tk">8</button><button class="tk">9</button>
+            <button class="tk">4</button><button class="tk">5</button><button class="tk">6</button>
+            <button class="tk">1</button><button class="tk">2</button><button class="tk">3</button>
+            <button class="tk">-</button><button class="tk">0</button><button class="tk">⌫</button>
+            <button class="tk clear">C</button>
+          </div>
+          <button id="submit-answer" class="btn submit-btn" aria-label="回答する">回答</button>
+        </div>
+
+        <div id="message" class="game-message" aria-live="assertive"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer container" role="contentinfo">
+      <p>© 2025 楽しく勉強する</p>
+      <nav aria-label="フッターメニュー">
+        <a href="../index.html">利用規約</a>
+        <a href="../index.html">プライバシー</a>
+      </nav>
+    </footer>
+
+    <script defer src="../assets/js/game.js"></script>
+  </body>
+</html>

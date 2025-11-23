@@ -1,0 +1,136 @@
+/* History game styles — site の既存デザインに合わせた簡易スタイル */
+.history-area {
+  padding: 1rem;
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  min-height: 14rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  align-items: stretch;
+}
+
+/* Sortable の ghost/chosen クラス */
+.sortable-ghost { 
+  opacity: 0.6; 
+  transform: scale(0.995); 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.09); 
+}
+.sortable-chosen { 
+  box-shadow: var(--shadow-md); 
+  transform: translateZ(0); 
+  border: 1px solid rgba(37,99,235,0.08); 
+}
+
+/* list */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  width: 100%;
+}
+/* 追加・変更点：タッチでの安定化、選択抑制、ハンドル周りの見た目 */
+.list-item {
+  display: grid;
+  grid-template-columns: 7.5ch 40px 1fr; /* 年号幅 / ハンドル幅 / イベント本文 */
+  gap: .5rem;
+  align-items: center;
+  padding: .6rem .8rem; /* 縦横の余白を微調整 */
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+.list-item:active { cursor: grabbing; }
+
+/* ハンドルを強調（任意） */
+.updown-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* フォーカス時のスタイル（キーボード操作の可視化） */
+.list-item:focus {
+  outline: 3px solid rgba(37,99,235,0.18);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* 年表示の小さな調整 */
+.year {
+  margin-left: .75rem;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+/* controls */
+.controls { display:flex; gap:.5rem; flex-wrap:wrap; }
+.controls .btn { flex: 1 1 auto; min-width: 120px; }
+
+/* popup */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  z-index: 999;
+}
+.popup {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1rem;
+  max-width: 720px;
+  width: 100%;
+  box-shadow: var(--shadow-md);
+}
+.popup-content h3 { margin: 0 0 .5rem 0; font-size: 1rem; }
+.popup-content p { margin: 0 0 1rem 0; color: var(--muted); }
+
+/* responsive */
+@media (max-width: 640px) {
+  .history-area { min-height: 16rem; }
+  .updown-marker { flex-basis: 36px; font-size: .9rem; }
+  .list-item { grid-template-columns: 6.5ch 36px 1fr; padding: .5rem .6rem; }
+}
+
+/* 年号を左側に表示して縦を揃える */
+.left-year {
+  text-align: right;       /* 数字を右揃え */
+  color: var(--muted);
+  font-size: .95rem;
+  opacity: 0;              /* 初期は非表示（回答時に表示） */
+  transition: opacity 160ms ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-self: center;
+}
+
+/* 左年号を表示するクラス */
+.list-item.year-shown .left-year {
+  opacity: 1;
+}
+
+/* left-year を先頭にしてハンドル等の順を調整（既存の順序を上書き） */
+.left-year { order: 0; }
+.updown-marker { order: 1; }
+.event { order: 2; }
+
+/* イベント本文は最後の列（可変） */
+.event {
+  overflow-wrap: anywhere;
+  min-width: 0; /* flex の代替で折り返しを許可 */
+}

@@ -1,0 +1,144 @@
+
+.list {
+    padding: 0;
+}
+
+.list li {
+    list-style: none;
+    flex: auto;
+    border-radius: 10px;
+    width: 50%;
+    background-color: white;
+    box-shadow: 0 0 4px gray;
+    margin: 1rem auto;
+    padding: 1rem 0.5rem;
+    cursor : pointer;
+    display: flex;
+}
+
+.updown-marker {
+  flex: 0 0 auto;    /* 固定幅（縮まない） */
+  width: 5rem;       /* 年のエリアの幅を決める */
+  text-align: left;
+  font-weight: bold;
+  padding: 0 1rem;
+  color: gray;
+
+}
+
+.year {
+  display: none;
+  padding: 0 0;
+  width: 5rem;
+  font-weight: bold;
+}
+
+.event {
+  flex: 1;           /* 残りのスペースを使う */
+  text-align: center; /* 中央寄せ */
+}
+
+.btn {
+    flex: auto;
+    width: 30%;
+    padding: 0.5rem;
+    margin: 1rem 1rem 0 1rem;
+    font-size: 1.5rem;
+    background-color: white;
+    box-shadow: 0 0 4px gray;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#nextBtn {
+  display: none;
+}
+
+.btn:hover {
+    background-color: #f0f0f0;
+}
+
+.result {
+  margin: 1rem 0;
+}
+
+/* ポップアップ関連 */
+#notesBtn {
+  display: none;
+}
+
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+#popupContainer {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.popup-content {
+  margin-bottom: 2rem;
+}
+
+.popup-content h3 {
+  margin: 0.5rem 0;
+}
+
+.popup-content p {
+  margin: 0;
+}
+
+.popup button {
+  margin: 0;
+  padding: 0.5rem 2rem;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  float: right;
+}
+
+.sortable-ghost {
+  opacity: 0;
+}
+
+
+/* タブレット向けレイアウト */
+@media (max-width: 1000px) {
+  .list li {
+    width: 70%;
+  }
+
+  .btn {
+    width: 40%;
+  }
+}
+
+/* スマホ向けレイアウト */
+@media (max-width: 670px) {
+  .list li {
+    width: 100%;
+  }
+
+  .btn {
+    width: 50%;
+  }  
+}

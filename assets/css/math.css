@@ -1,0 +1,115 @@
+/* ---- Game specific additions (append to bottom of file) ---- */
+
+.game-panel {
+  max-width: 520px;
+  margin: 0 auto 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.game-top {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.timer {
+  flex: 1 1 auto;
+  height: 12px;
+  background: rgba(15,23,42,0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+.timer-bar {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, var(--accent-600), var(--accent));
+  width: 100%;
+  transform-origin: right center;
+  transition: width 200ms linear;
+}
+
+.timer-label {
+  min-width: 86px;
+  text-align: right;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.problem-area {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.problem-number {
+  color: var(--muted);
+  font-size: .9rem;
+  margin-bottom: .5rem;
+}
+.formula {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text);
+  min-height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 追加：横中央揃え */
+  text-align: center;      /* KaTeX のブロック表示にも有効 */
+}
+
+.answer-area {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.answer-input {
+  padding: .65rem .8rem;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(15,23,42,0.06);
+  width: 100%;
+  box-shadow: none;
+}
+
+.tenkey {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5rem;
+}
+.tenkey .tk {
+  padding: .6rem;
+  border-radius: 8px;
+  background: rgba(15,23,42,0.04);
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.tenkey .tk:active {
+  transform: translateY(1px);
+}
+.tenkey .clear {
+  grid-column: 1 / -1;
+  background: rgba(255,69,58,0.08);
+}
+
+.submit-btn {
+  align-self: stretch;
+  justify-self: center;
+}
+
+.game-message {
+  min-height: 1.2rem;
+  font-weight: 600;
+  color: var(--accent-600);
+}
+
+/* small adjustments for narrow screens */
+@media (max-width: 540px) {
+  .game-panel { padding: 0; }
+  .formula { font-size: 1.1rem; }
+}

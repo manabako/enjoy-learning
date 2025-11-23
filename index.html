@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>楽しく勉強する</title>
+    <!-- Google fontsの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- stylesheetの読み込み -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.0/css/all.css">
+    <link rel="stylesheet" href="./assets/css/stylesheet.css">
+  </head>
+  <body>
+    <header class="site-header container" role="banner">
+      <a class="site-brand" href="#">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="site-title">楽しく勉強する</span>
+      </a>
+      <nav class="site-nav" role="navigation" aria-label="主要メニュー">
+        <a href="#">ホーム</a>
+        <a href="./courses/index.html">コース</a>
+        <!-- <a href="#">お問い合わせ</a> -->
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <section class="hero animate-fade-up" aria-labelledby="hero-title">
+        <div class="hero-card">
+          <h1 id="hero-title">学びを楽しく簡単に</h1>
+          <p><br>短時間でも楽しく勉強できるコンテンツを提供します。<br><br></p>
+          <p>
+            <a class="btn" href="./math/index.html" aria-label="まずは数学を始める">まずは数学を始める</a>
+            <!-- <a class="btn" href="#" aria-label="学習を始める">学習を始める</a> -->
+            <a class="btn secondary" href="./courses/index.html" aria-label="コースを見る">コースを見る</a>
+          </p>
+        </div>
+
+        <aside class="hero-card" aria-hidden="false">
+          <h3>人気の科目</h3>
+          <div class="contents">
+            <ul>
+              <li><a href="./math/index.html"><i class="fa-solid fa-square-root-alt"></i> 数学</a></li>
+              <li><a href="./history/index.html"><i class="fa-solid fa-feather"></i> 歴史</a></li>
+              <li><a href="#"><i class="fa-solid fa-atom"></i> 理科</a></li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <section class="main-grid" aria-label="コース一覧">
+        <article class="card" tabindex="0">
+            <a class="card-link" href="./math/index.html" aria-label="数学コースへ移動">
+                <h3><i class="fa-solid fa-square-root-alt" aria-hidden="true"></i> 数学</h3>
+                <p>高校数学の簡単な数式回答問題です。</p>
+            </a>
+        </article>
+
+        <article class="card" tabindex="0">
+          <a class="card-link" href="./history/index.html" aria-label="歴史コースへ移動">
+            <h3><i class="fa-solid fa-feather" aria-hidden="true"></i> 歴史</h3>
+            <p>出来事を年代順に並べて学ぶインタラクティブゲームです。</p>
+          </a>
+        </article>
+
+        <article class="card" tabindex="0">
+          <h3><i class="fa-solid fa-atom" aria-hidden="true"></i> 理科</h3>
+          <p>準備中</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer container" role="contentinfo">
+      <p>© 2025 楽しく勉強する</p>
+      <nav aria-label="フッターメニュー">
+        <!-- <a href="#">利用規約</a>
+        <a href="#">プライバシー</a> -->
+      </nav>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+        const el = document.querySelector('.animate-fade-up');
+        if (!el) return;
+        el.classList.add('will-animate');
+        requestAnimationFrame(()=> requestAnimationFrame(()=> el.classList.add('is-visible')));
+        });
+    </script>
+  </body>
+</html>

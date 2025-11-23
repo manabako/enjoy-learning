@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>古典ギリシア語を楽しく学ぶ</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.0/css/all.css">
+    <link rel="stylesheet" href="../../assets/css/stylesheet.css">
+    <link rel="stylesheet" href="./background_style.css">
+  </head>
+  <body>
+    <header>
+        <div class="nav-links">
+          <a href="../../index.html">TOP</a>
+          <a href="./index.html">戻る</a>
+        </div>
+    </header>
+    <main>
+        <div class="main-area">
+            <h1>歴史を学ぶ</h1>
+            <p>歴史上の出来事を古い順に並べてください</p>
+            <ul id="list" class="list"></ul>
+            <button id="answerBtn" class="btn">回答</button>
+            <button id="notesBtn" class="btn">解説</button>
+            <button id="nextBtn" class="btn">次へ</button>
+            <div class="result"></div>
+        </div>
+        <!-- ポップアップ -->
+        <div id="popupOverlay" class="popup-overlay">
+          <div class="popup" id="popup">
+            <div id="popupContainer"></div>
+            <button id="closeBtn">閉じる</button>
+          </div>
+        </div>
+    </main>
+    <footer>
+      <div class="foot-container">
+        <p><a href="https://github.com/manabako"><i class="fa-brands fa-github"></i> manabako</a></p>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="../../assets/js/background.js"></script>
+  </body>
+</html>
