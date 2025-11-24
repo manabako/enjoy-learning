@@ -36,7 +36,7 @@
 /* 追加・変更点：タッチでの安定化、選択抑制、ハンドル周りの見た目 */
 .list-item {
   display: grid;
-  grid-template-columns: 7.5ch 40px 1fr; /* 年号幅 / ハンドル幅 / イベント本文 */
+  grid-template-columns: 7.5ch 10px 1fr; /* 年号幅 / ハンドル幅 / イベント本文 */
   gap: .5rem;
   align-items: center;
   padding: .6rem .8rem; /* 縦横の余白を微調整 */
@@ -103,7 +103,7 @@
 @media (max-width: 640px) {
   .history-area { min-height: 16rem; }
   .updown-marker { flex-basis: 36px; font-size: .9rem; }
-  .list-item { grid-template-columns: 6.5ch 36px 1fr; padding: .5rem .6rem; }
+  .list-item { grid-template-columns: 6.5ch 5px 1fr; padding: .5rem .6rem; }
 }
 
 /* 年号を左側に表示して縦を揃える */
