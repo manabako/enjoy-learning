@@ -1,0 +1,88 @@
+/* Chemistry game styles (数学ゲームに合わせる) */
+.game-panel { max-width: 520px; margin: 0 auto 2rem auto; display:flex; flex-direction:column; gap:1rem; }
+.game-top { display:flex; align-items:center; gap:.75rem; }
+.timer { flex:1 1 auto; height:12px; background: rgba(15,23,42,0.06); border-radius:999px; overflow:hidden; position:relative; }
+.timer-bar { position:absolute; top:0; right:0; bottom:0; left:0; background: linear-gradient(90deg,var(--accent-600),var(--accent)); width:100%; transform-origin:right center; transition:width 200ms linear; }
+.timer-label { min-width:86px; text-align:right; color:var(--muted); font-size:.95rem; }
+
+.problem-area { background:var(--card); padding:1rem; border-radius:12px; box-shadow:var(--shadow-sm); min-height:3.6rem; display:flex; align-items:center; }
+.question { font-weight:700; font-size:1.1rem; text-align:center; width:100%; }
+
+.answer-area { display:flex; flex-direction:column; gap:.75rem; }
+
+.choices { list-style:none; margin:0; padding:0; display:grid; grid-template-columns: repeat(3, 1fr); gap:.6rem; }
+.choice {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:.25rem;
+  padding:.6rem;
+  border-radius:10px;
+  background:var(--card);
+  border:1px solid rgba(15,23,42,0.04);
+  box-shadow:var(--shadow-sm);
+  cursor:pointer;
+  user-select:none;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+.choice .symbol {
+  font-weight:800;
+  font-size:1.45rem;
+  line-height:1;
+}
+.choice .name {
+  font-size:.65rem;
+  color:var(--muted);
+}
+
+/* active / selected state */
+.choice[aria-pressed="true"],
+.choice.selected {
+  background: linear-gradient(180deg, rgba(99,102,241,0.08), rgba(99,102,241,0.04));
+  border-color: rgba(99,102,241,0.22);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16,24,40,0.06);
+}
+
+/* disabled look when resetting after incorrect */
+.choice.disabled {
+  opacity: 0.45;
+  pointer-events: auto; /* still clickable to re-enable selection */
+}
+
+/* controls */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  align-items: stretch;
+}
+
+/* 回答ボタンを幅いっぱいにして内容を中央に揃える（上書き） */
+.controls .btn {
+  width: 100%;
+  padding: .65rem .8rem;
+  font-size: 1rem;
+  /* 中央寄せ（アイコン＋文字にも対応） */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  text-align: center;
+}
+
+/* result はボタンの下に表示（中央寄せ） */
+.result {
+  min-height: 1.2rem;
+  text-align: center;
+  font-weight: 700;
+  color: inherit;
+  margin: 0; /* 上下の余白は controls gap で管理 */
+}
+
+/* スマホでも同様の縦並びを確保 */
+@media (max-width:540px) {
+  .controls { gap: .4rem; }
+  .controls .btn { padding: .55rem .6rem; }
+}

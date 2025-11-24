@@ -1,0 +1,30 @@
+[
+    {
+        "number":1, "symbol":"H","name":"水素",
+        "tags":["非金属", "アンモニア"]
+    },
+    {
+        "number":2, "symbol":"He", "name":"ヘリウム",
+        "tags":["希ガス"]
+    },
+    {
+        "number":3, "symbol":"Li", "name":"リチウム",
+        "tags":["アルカリ金属"]
+    },
+    {
+        "number":4, "symbol":"Be", "name":"ベリリウム",
+        "tags":["アルカリ土類金属"]
+    },
+    {
+        "number":5, "symbol":"B", "name":"ホウ素",
+        "tags":["半金属"]
+    },
+    {
+        "number":6, "symbol":"C", "name":"炭素",
+        "tags":["非金属", "有機化合物"]
+    },
+    {
+        "number":7, "symbol":"N", "name":"窒素",
+        "tags":["非金属", "アンモニア"]
+    }
+]
