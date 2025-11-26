@@ -1,5 +1,7 @@
 // game.jsから分離した問題生成ロジック
-export function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+export function randInt(min, max) { 
+  return Math.floor(Math.random() * (max - min + 1)) + min; 
+}
 
 // ログの計算
 export function calLog() {
@@ -47,12 +49,17 @@ export function calIntegral() {
 
 // 微分の計算
 export function calDifferential() {
-  const flag = randInt(0,1);
+  const flag = randInt(0,2);
   if (flag === 0) {
     const n = randInt(1,3);
     const a = randInt(1,4);
     const solution = n * Math.pow(a, n-1);
     const formula = `\\left. \\frac{d}{dx} x^{${n}} \\right|_{x=${a}}`;
+    return { solution, formula };
+  } else if (flag === 1) {
+    const a = randInt(2,4);
+    const solution = a ;
+    const formula = `\\left. \\frac{d}{dx} \\ln x \\right|_{x=1/${a}}`;
     return { solution, formula };
   } else {
     const keys = ["0","\\pi","\\frac{\\pi}{2}"];
