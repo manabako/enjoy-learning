@@ -36,13 +36,41 @@ export function calLog() {
 
 // 積分の計算
 export function calIntegral() {
-  const n = randInt(1,3);
+  const n = randInt(1,4);
   const toA = n * randInt(1,2);
-  const solution = Math.pow(toA, n) / n;
+  let solution;
   let formula;
-  if (n === 1) formula = `\\int_0^{${toA}} dx`;
-  else if (n === 2) formula = `\\int_0^{${toA}} x\\,dx`;
-  else formula = `\\int_0^{${toA}} x^{${n-1}}\\,dx`;
+  if (n === 1) {
+    formula = `\\int_0^{${toA}} dx`;
+    solution = Math.pow(toA, n) / n;
+  } else if (n === 2) {
+    formula = `\\int_0^{${toA}} x\\,dx`;
+    solution = Math.pow(toA, n) / n;
+  } else if (n === 3) {
+    formula = `\\int_0^{${toA}} x^{${n-1}}\\,dx`;
+    solution = Math.pow(toA, n) / n;
+  } else {
+    const pQ = randInt(1,6);
+    const p = randInt(1,9);
+    const q = pQ + p;
+    const sign = Math.random() < 0.5 ? -1 : 1;
+    let k = sign*randInt(1,3);
+    if (pQ === 5) {
+      k *= 6;
+    } else if (pQ === 4 || pQ === 2) {
+      k *= 3;
+    } else if (pQ === 3) {
+      k *= 2;
+    }
+    if (k === 1) {
+      formula = `\\int_${p}^{${q}}(x - ${p})(x - ${q})\\,dx`;
+    } else if (k === -1) {
+      formula = `\\int_${p}^{${q}}-(x - ${p})(x - ${q})\\,dx`;
+    } else {
+      formula = `\\int_${p}^{${q}}${k}(x - ${p})(x - ${q})\\,dx`;
+    };
+    solution = -k * ( (q - p)**3 ) / 6;
+  }
   return { solution: Math.round(solution), formula };
 }
 
