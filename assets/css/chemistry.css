@@ -39,8 +39,8 @@
 /* active / selected state */
 .choice[aria-pressed="true"],
 .choice.selected {
-  background: linear-gradient(180deg, rgba(99,102,241,0.08), rgba(99,102,241,0.04));
-  border-color: rgba(99,102,241,0.22);
+  background: var(--choice-bg);
+  border-color: var(--choice-border);
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(16,24,40,0.06);
 }
