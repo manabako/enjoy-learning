@@ -194,6 +194,18 @@ export function calDet() {
   }
 }
 
+// 複素数の計算
+export function calComplex() {
+  const flag = 0;
+  if (flag === 0) {
+    const a = randInt(1,5); const b = randInt(1,5);
+    const real = a;
+    const imag = b;
+    const solution = real*real + imag*imag;
+    return { solution, formula: `| ${a} + ${b}i |^2` };
+  }
+}
+
 // Export all generators
 export const generators = [
     calLog, 
@@ -203,5 +215,6 @@ export const generators = [
     calCcombination, 
     calSequence, 
     calFloorCeil, 
-    calDet
+    calDet,
+    calComplex
 ];
