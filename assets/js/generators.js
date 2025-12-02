@@ -1,6 +1,6 @@
 // game.jsから分離した問題生成ロジック
-export function randInt(min, max) { 
-  return Math.floor(Math.random() * (max - min + 1)) + min; 
+export function randInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // ログの計算
@@ -36,7 +36,7 @@ export function calLog() {
 
 // 積分の計算
 export function calIntegral() {
-  const n = randInt(1,4);
+  const n = randInt(1,5);
   const toA = n * randInt(1,2);
   let solution;
   let formula;
@@ -49,6 +49,17 @@ export function calIntegral() {
   } else if (n === 3) {
     formula = `\\int_0^{${toA}} x^{${n-1}}\\,dx`;
     solution = Math.pow(toA, n) / n;
+  } else if (n === 4) {
+    const thetaMap = ["\\pi","\\frac{\\pi}{2}","\\frac{3}{2}\\pi","2\\pi"];
+    const farcMap = [1,0.5,1.5,2];
+    const key = randInt(0,3);
+    if (Math.random() < 0.5) {
+      formula = `\\int_0^{${thetaMap[key]}} \\sin x\\,dx`;
+      solution = 1 - Math.cos(Math.PI * farcMap[key]);
+    } else {
+      formula = `\\int_0^{${thetaMap[key]}} \\cos x\\,dx`;
+      solution = Math.sin(Math.PI * farcMap[key]);
+    }
   } else {
     const pQ = randInt(1,6);
     const p = randInt(1,9);
@@ -208,13 +219,13 @@ export function calComplex() {
 
 // Export all generators
 export const generators = [
-    calLog, 
-    calIntegral, 
-    calDifferential, 
-    calTrigonometric, 
-    calCcombination, 
-    calSequence, 
-    calFloorCeil, 
+    calLog,
+    calIntegral,
+    calDifferential,
+    calTrigonometric,
+    calCcombination,
+    calSequence,
+    calFloorCeil,
     calDet,
     calComplex
 ];
