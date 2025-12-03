@@ -93,7 +93,12 @@ export function calDifferential() {
     const n = randInt(1,3);
     const a = randInt(1,4);
     const solution = n * Math.pow(a, n-1);
-    const formula = `\\left. \\frac{d}{dx} x^{${n}} \\right|_{x=${a}}`;
+    let formula;
+    if (n === 1) {
+      formula = `\\left. \\frac{d}{dx} x \\right|_{x=${a}}`;
+    } else {
+      formula = `\\left. \\frac{d}{dx} x^{${n}} \\right|_{x=${a}}`;
+    }
     return { solution, formula };
   } else if (flag === 1) {
     const a = randInt(2,4);
