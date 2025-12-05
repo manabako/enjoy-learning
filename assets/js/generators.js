@@ -122,34 +122,33 @@ export function calDifferential() {
 
 // 三角関数の計算
 export function calTrigonometric() {
-  const thetaMap = ["0","\\pi","\\frac{\\pi}{2}","\\frac{\\pi}{3}","\\frac{\\pi}{4}"];
-  const sinVals = [0,0,1]; 
-  const cosVals = [1,-1,0]; 
-  const flag = randInt(0,3);
+  const thetaMap = ["0","\\pi","\\frac{\\pi}{2}","\\frac{\\pi}{3}","\\frac{\\pi}{4}","\\frac{\\pi}{6}"];
+  const flag = randInt(0,2);
   if (flag === 0) { // 恒等式
     const key = randInt(0,4); 
     return { solution: 1, formula: `\\sin^{2} ${thetaMap[key]} + \\cos^{2} ${thetaMap[key]}` };
   } else if (flag === 1) {  // sin, cos, tan
     const flag2 = randInt(0,2);
+    const key = randInt(0,2); 
     if (flag2 === 0) {
-      const key = randInt(0,2); 
+      const sinVals = [0,0,1];
       return { solution: sinVals[key], formula: `\\sin ${thetaMap[key]}` };
-    } else if (flag === 1) {
-      const key = randInt(0,2); 
+    } else if (flag2 === 1) {
+      const cosVals = [1,-1,0]; 
       return { solution: cosVals[key], formula: `\\cos ${thetaMap[key]}` };
     } else {
-      const choices = [0,0,1]; 
       const key = [0,1,4][Math.floor(Math.random()*3)]; 
       const tanVals = {0:0,1:0,4:1}; 
       return { solution: tanVals[key], formula: `\\tan ${thetaMap[key]}` };
     }
   } else {  // sin^2, cos^2
+    const key = randInt(0,5);
     if (Math.random() < 0.5) {
-      const key = randInt(0,2);
-      return { solution: sinVals[key]**2, formula: `\\sin^2 ${thetaMap[key]}` };
+      const sin2Vals = [0,0,1,0.75,0.5,0.25];
+      return { solution: 12*sin2Vals[key], formula: `12\\sin^2 ${thetaMap[key]}` };
     } else {
-      const key = randInt(0,2);
-      return { solution: cosVals[key]**2, formula: `\\cos^2 ${thetaMap[key]}` };
+      const cos2Vals = [1,1,0,0.25,0.5,0.75];
+      return { solution: 12*cos2Vals[key], formula: `12\\cos^2 ${thetaMap[key]}` };
     }
   }
 }
