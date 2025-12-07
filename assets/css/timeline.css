@@ -1,0 +1,220 @@
+
+/* --- 1. Base Variables & Reset --- */
+:root {
+    --text-sub: #6b7280;
+    --card-bg: #ffffff;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --card-radius: 16px;
+    --accent-hover: #4f46e5;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --drop-zone-bg: rgba(99, 102, 241, 0.1);
+    --drop-zone-active: rgba(99, 102, 241, 0.3);
+    --placed-animation-bg: #ecfdf5;
+    --challenger-are-bg: rgba(255, 255, 255, 0.9);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --card-bg: rgba(28, 41, 66);
+    --text-sub: #6b7280;
+    --placed-animation-bg: #0f2e27;
+    --challenger-are-bg: rgba(0, 0, 0, 0.9);
+  }
+}
+
+* {
+    user-select: none;
+}
+
+/* --- 2. Layout Components --- */
+header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0 0 8px 0;
+}
+
+p.sub {
+    color: var(--text-sub);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    /* スクロール時に一番下のドロップゾーンが見えるよう余白を多めに確保 */
+    padding-bottom: 220px;
+}
+
+/* --- 3. The Timeline --- */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background: #e5e7eb;
+    z-index: 0;
+}
+
+.timeline-card {
+    background: var(--card-bg);
+    border-radius: var(--card-radius);
+    padding: 16px 20px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.2s;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.timeline-card .year {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.1rem;
+    min-width: 50px;
+    text-align: center;
+}
+
+.timeline-card .content {
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* --- 4. Drop Zones --- */
+.drop-zone {
+    height: 16px;
+    margin: 4px 0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drop-zone.active {
+    height: 60px;
+    background-color: var(--drop-zone-bg);
+    border: 2px dashed var(--accent);
+}
+
+.drop-zone.drag-over {
+    background-color: var(--drop-zone-active);
+    transform: scale(1.02);
+}
+
+/* --- 5. Challenger Area (Fixed Footer) --- */
+.challenger-area {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--challenger-are-bg);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: opacity 0.3s;
+}
+
+/* 修正：pointer-events: none を削除しました */
+.challenger-area.dimmed {
+    opacity: 0.4;
+}
+
+.challenger-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-sub);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.draggable-card {
+    background: var(--accent);
+    color: white;
+    padding: 16px 24px;
+    border-radius: var(--card-radius);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    font-weight: 600;
+    cursor: grab;
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
+    touch-action: none;
+    transition: transform 0.1s;
+}
+
+.draggable-card:active {
+    cursor: grabbing;
+}
+
+/* --- 6. Animations --- */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px) rotate(-2deg); background-color: var(--error-color); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); background-color: var(--accent); }
+}
+
+.shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.placed-animation {
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: var(--placed-animation-bg);
+}
+
+.game-over {
+    text-align: center;
+    padding: 40px;
+}
+.btn-restart {
+    background: var(--card-bg);
+    color: var(--text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 16px;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>順序ゲーム — 楽しく勉強する</title>
+        <!-- Google fontsの読み込み -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <!-- stylesheetの読み込み -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.0/css/all.css">
+        <link rel="stylesheet" href="../assets/css/stylesheet.css">
+        <link rel="stylesheet" href="../assets/css/timeline.css">
+    </head>
+    <body>
+        <header class="site-header container" role="banner">
+            <a class="site-brand" href="../index.html">
+                <span class="logo" aria-hidden="true"></span>
+                <span class="site-title">楽しく勉強する</span>
+            </a>
+            <nav class="site-nav" role="navigation" aria-label="主要メニュー">
+                <a href="../index.html">トップ</a>
+                <a href="../index.html#">コース</a>
+            </nav>
+        </header>
+        <div>
+            <h1>Timeline Sort</h1>
+            <p class="sub">カードを正しい時代順に並べよう</p>
+        </div>
+        <div class="game-container">
+            <div id="timeline" class="timeline"></div>
+        </div>
+
+        <div class="challenger-area">
+            <div class="challenger-label">Next Card (Drag this)</div>
+            <div id="draggable" class="draggable-card" draggable="true">
+                Loading...
+            </div>
+        </div>
+        <script defer src="../assets/js/timeline.js"></script>
+    </body>
+</html>
