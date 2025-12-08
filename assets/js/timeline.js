@@ -53,23 +53,29 @@
         createDropZone(placedCards.length);
     }
 
+    // --- createDropZone を改良：現在ホバーしているゾーンだけ active にする ---
+    // --- createDropZone を改良：ホバー判定エリアを上下に拡張（見た目は変わらない） ---
     function createDropZone(index) {
         const zone = document.createElement('div');
         zone.className = 'drop-zone';
         zone.dataset.index = index;
 
+        zone.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+        });
+
         zone.addEventListener('dragover', (e) => {
             e.preventDefault();
-            zone.classList.add('drag-over');
+            e.dataTransfer.dropEffect = 'move';
         });
 
         zone.addEventListener('dragleave', () => {
-            zone.classList.remove('drag-over');
+            // dragleave は一時的に無視（グローバル dragover で制御）
         });
 
         zone.addEventListener('drop', (e) => {
             e.preventDefault();
-            zone.classList.remove('drag-over');
+            zone.classList.remove('drag-over', 'active');
             handleAttempt(parseInt(zone.dataset.index));
         });
 
@@ -132,10 +138,12 @@
         autoScrollFrame = requestAnimationFrame(updateScroll);
     }
 
+    // --- startDrag の修正: すべてのドロップゾーンを一斉に開かない ---
     function startDrag() {
         isDragging = true;
         draggableEl.style.opacity = '0.5';
-        document.querySelectorAll('.drop-zone').forEach(el => el.classList.add('active'));
+        // ドロップゾーンは一斉に active にしない（hover のときだけ開く）
+        // document.querySelectorAll('.drop-zone').forEach(el => el.classList.add('active'));
         challengerArea.classList.add('dimmed');
 
         if (autoScrollFrame) cancelAnimationFrame(autoScrollFrame);
@@ -180,9 +188,29 @@
 
         draggableEl.addEventListener('dragend', endDrag);
 
+        // --- グローバル dragover: すべてのドロップゾーンの判定を毎回更新 ---
         document.addEventListener('dragover', (e) => {
             e.preventDefault();
             dragClientY = e.clientY;
+            
+            // すべてのドロップゾーンについて判定を更新
+            const zones = document.querySelectorAll('.drop-zone');
+            let foundActive = false;
+            
+            zones.forEach(zone => {
+                const rect = zone.getBoundingClientRect();
+                const expandSize = 40;
+                const expandedTop = rect.top - expandSize;
+                const expandedBottom = rect.bottom + expandSize;
+                const dragY = e.clientY;
+                
+                if (dragY >= expandedTop && dragY <= expandedBottom && !foundActive) {
+                    zone.classList.add('active', 'drag-over');
+                    foundActive = true;
+                } else {
+                    zone.classList.remove('active', 'drag-over');
+                }
+            });
         });
 
 
@@ -209,6 +237,7 @@
 
         }, { passive: false });
 
+        // --- touchmove の修正: 指の下のゾーンだけ active にする ---
         document.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
             e.preventDefault();
@@ -217,12 +246,24 @@
             dragClientY = touch.clientY;
             moveTouchOverlay(touch.clientX, touch.clientY);
 
-            const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-            document.querySelectorAll('.drop-zone').forEach(el => el.classList.remove('drag-over'));
+            // すべてのドロップゾーンについて判定を更新（マウスと同じロジック）
+            const zones = document.querySelectorAll('.drop-zone');
+            let foundActive = false;
 
-            if (elementBelow && elementBelow.classList.contains('drop-zone')) {
-                elementBelow.classList.add('drag-over');
-            }
+            zones.forEach(zone => {
+                const rect = zone.getBoundingClientRect();
+                const expandSize = 40;
+                const expandedTop = rect.top - expandSize;
+                const expandedBottom = rect.bottom + expandSize;
+                const dragY = touch.clientY;
+
+                if (dragY >= expandedTop && dragY <= expandedBottom && !foundActive) {
+                    zone.classList.add('active', 'drag-over');
+                    foundActive = true;
+                } else {
+                    zone.classList.remove('active', 'drag-over');
+                }
+            });
         }, { passive: false });
 
         document.addEventListener('touchend', (e) => {
