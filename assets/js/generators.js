@@ -240,6 +240,16 @@ export function calComplex() {
   }
 }
 
+// 極限の計算
+export function calLimit() {
+  const flag = randInt(0,1);
+  if (flag === 0) {
+    return { solution: 1, formula: `\\lim_{x\\to 0} \\frac{\\sin x}{x}`};
+  } else {
+    return { solution: 0, formula: `\\lim_{x\\to \\infty} \\frac{\\sin x}{x}`};
+  }
+}
+
 // Export all generators
 export const generators = [
     calLog,
@@ -250,5 +260,6 @@ export const generators = [
     calSequence,
     calFloorCeil,
     calDet,
-    calComplex
+    calComplex,
+    calLimit
 ];
