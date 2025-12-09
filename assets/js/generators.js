@@ -154,10 +154,18 @@ export function calTrigonometric() {
 }
 
 // 組み合わせ・順列・階乗の計算
-export function calCcombination() {
+export function calCombination() {
   const flag = randInt(0,3);
-  if (flag === 0) {
-    const n = randInt(0,5); let sol = 1; for (let i=2;i<=n;i++) sol *= i; return { solution: sol, formula: `${n}!` };
+  if (flag === 0) { // n!, n!!
+    const n = randInt(0,5);
+    let sol = 1;
+    if (Math.random() < 0.7) {  // n!
+      for (let i=2;i<=n;i++) sol *= i;
+      return { solution: sol, formula: `${n}!` };
+    } else {  // n!!
+      for (let i=n;i>0;i-=2) sol *= i;
+      return { solution: sol, formula: `${n}!!` };
+    }
   } else if (flag === 1) {
     const n = randInt(1,5); const k = randInt(0,n); // permutations nPk
     let perm = 1;
@@ -256,7 +264,7 @@ export const generators = [
     calIntegral,
     calDifferential,
     calTrigonometric,
-    calCcombination,
+    calCombination,
     calSequence,
     calFloorCeil,
     calDet,
