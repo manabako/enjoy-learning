@@ -286,19 +286,29 @@
         
         // data load (fetch, fallback to window.EVENTS)
         try {
-            const jsonFile = getJsonFileName(); // URLパラメータから取得
+            const contentFiles = Object.freeze({
+                timeline: 'timeline',
+                events: 'events',
+                eventsag: 'eventsag',
+                presidents: 'presidents',
+                measurement: 'measurement',
+                chokusenwakashu: 'chokusenwakashu'
+            });
+            const param = getJsonFileName();
+            const jsonFile = contentFiles[param]; // URLパラメータから取得
+            if (!jsonFile) throw new Error('invalid json file');
             const resp = await fetch(`../assets/json/${jsonFile}.json`);
             if (!resp.ok) throw new Error('fetch failed: ' + resp.status);
             eventData = await resp.json();
         } catch (err) {
-            console.warn('events.json fetch failed, trying window.EVENTS fallback.', err);
+            console.warn('Json fetch failed, trying window.EVENTS fallback.', err);
             if (window && Array.isArray(window.EVENTS) && window.EVENTS.length) {
                 eventData = window.EVENTS;
-        } else {
-            console.error('No events data available (fetch failed and window.EVENTS not present).', err);
-            resultEl.textContent = 'データの読み込みに失敗しました。';
-            return;
-        }
+            } else {
+                console.error('No events data available (fetch failed and window.EVENTS not present).', err);
+                resultEl.textContent = 'データの読み込みに失敗しました。';
+                return;
+            }
         }
 
         // ゲーム開始
