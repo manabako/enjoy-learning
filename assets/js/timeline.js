@@ -19,6 +19,19 @@
     // --- タッチイベント用の初期化
     let touchOverlay = null;
 
+    // --- JSON field mapping (configurable via URL params: yearKey, textKey)
+    const _params = new URLSearchParams(window.location.search);
+    let YEAR_KEY = _params.get('yearKey') || '';
+    let TEXT_KEY = _params.get('textKey') || '';
+
+    function parseYear(value) {
+        if (value == null) return null;
+        if (typeof value === 'number' && !isNaN(value)) return value;
+        const s = String(value).trim();
+        const m = s.match(/-?\d+/);
+        return m ? parseInt(m[0], 10) : null;
+    }
+
     function initGame() {
         let tempDeck = [...eventData].sort(() => Math.random() - 0.5);
         placedCards = [tempDeck.pop()];
@@ -85,11 +98,27 @@
     function handleAttempt(insertIndex) {
         const prevCard = insertIndex > 0 ? placedCards[insertIndex - 1] : null;
         const nextCard = insertIndex < placedCards.length ? placedCards[insertIndex] : null;
-        const currentYear = currentCard.year;
+        const currNum = currentCard.yearNum;
+        const prevNum = prevCard ? prevCard.yearNum : null;
+        const nextNum = nextCard ? nextCard.yearNum : null;
 
         let isCorrect = true;
-        if (prevCard && currentYear < prevCard.year) isCorrect = false;
-        if (nextCard && currentYear > nextCard.year) isCorrect = false;
+
+        if (prevCard) {
+            if (currNum != null && prevNum != null) {
+                if (currNum < prevNum) isCorrect = false;
+            } else {
+                if (String(currentCard.year).localeCompare(String(prevCard.year), undefined, { numeric: true }) < 0) isCorrect = false;
+            }
+        }
+
+        if (nextCard) {
+            if (currNum != null && nextNum != null) {
+                if (currNum > nextNum) isCorrect = false;
+            } else {
+                if (String(currentCard.year).localeCompare(String(nextCard.year), undefined, { numeric: true }) > 0) isCorrect = false;
+            }
+        }
 
         if (isCorrect) success(insertIndex);
         else fail();
@@ -292,14 +321,48 @@
                 eventsag: 'eventsag',
                 presidents: 'presidents',
                 measurement: 'measurement',
-                chokusenwakashu: 'chokusenwakashu'
+                chokusenwakashu: 'chokusenwakashu',
+                elements: 'elements',
+                countries: 'countries',
+                genji: 'genji'
             });
             const param = getJsonFileName();
             const jsonFile = contentFiles[param]; // URLパラメータから取得
             if (!jsonFile) throw new Error('invalid json file');
             const resp = await fetch(`../assets/json/${jsonFile}.json`);
             if (!resp.ok) throw new Error('fetch failed: ' + resp.status);
-            eventData = await resp.json();
+            const raw = await resp.json();
+
+            if (!Array.isArray(raw) || raw.length === 0) throw new Error('json must be a non-empty array');
+
+            // auto-detect keys if not provided via URL params
+            let yearKey = YEAR_KEY;
+            let textKey = TEXT_KEY;
+            const sample = raw[0] || {};
+            if (!yearKey || !textKey) {
+                const keys = Object.keys(sample);
+                if (!yearKey) {
+                    yearKey = keys.find(k => /year|date|time/i.test(k)) || 
+                    keys.find(k => /\d/.test(String(sample[k]))) || 
+                    keys[0];
+                }
+                if (!textKey) {
+                    textKey = keys.find(k => /event|name|title|label|content/i.test(k)) || 
+                    keys.find(k => typeof sample[k] === 'string') || 
+                    keys[1] || keys[0];
+                }
+            }
+
+            // normalize into expected shape and attach numeric year when possible
+            eventData = raw.map(item => ({
+                year: item[yearKey],
+                event: String(item[textKey] != null ? item[textKey] : ''),
+                yearNum: parseYear(item[yearKey]),
+                source: item
+            }));
+
+            console.info('timeline: using keys', yearKey, textKey);
+
         } catch (err) {
             console.warn('Json fetch failed, trying window.EVENTS fallback.', err);
             if (window && Array.isArray(window.EVENTS) && window.EVENTS.length) {

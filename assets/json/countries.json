@@ -1,0 +1,32 @@
+[
+    {
+        "name": "日本",
+        "rankArea": 61,
+        "rankPop": 11
+    },
+    {
+        "name": "アメリカ",
+        "rankArea": 3,
+        "rankPop": 3
+    },
+    {
+        "name": "イギリス",
+        "rankArea": 78,
+        "rankPop": 21
+    },
+    {
+        "name": "ロシア",
+        "rankArea": 1,
+        "rankPop": 9
+    },
+    {
+        "name": "カナダ",
+        "rankArea": 2,
+        "rankPop": 37
+    },
+    {
+        "name": "中国",
+        "rankArea": 3,
+        "rankPop": 2
+    }
+]
