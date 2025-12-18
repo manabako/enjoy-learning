@@ -26,7 +26,37 @@
     },
     {
         "name": "中国",
-        "rankArea": 3,
+        "rankArea": 4,
         "rankPop": 2
+    },
+    {
+        "name": "ブラジル",
+        "rankArea": 5,
+        "rankPop": 7
+    },
+    {
+        "name": "オーストラリア",
+        "rankArea": 6,
+        "rankPop": 54
+    },
+    {
+        "name": "インド",
+        "rankArea": 7,
+        "rankPop": 1
+    },
+    {
+        "name": "アルゼンチン",
+        "rankArea": 8,
+        "rankPop": 32
+    },
+    {
+        "name": "カザフスタン",
+        "rankArea": 9,
+        "rankPop": 62
+    },
+    {
+        "name": "アルジェリア",
+        "rankArea": 10,
+        "rankPop": 33
     }
 ]
