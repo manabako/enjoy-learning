@@ -1,0 +1,50 @@
+[
+  {
+    "id": "statue_of_liberty",
+    "type": "point",
+    "label": "自由の女神像",
+    "feature": { "type": "Point", "coordinates": [-74.0445, 40.6892] }
+  },
+  {
+    "id": "mount_fuji",
+    "type": "point",
+    "label": "富士山（山頂）",
+    "feature": { "type": "Point", "coordinates": [138.7274, 35.3606] }
+  },
+  {
+    "id": "pyramid_of_khufu",
+    "type": "point",
+    "label": "クフ王のピラミッド",
+    "feature": { "type": "Point", "coordinates": [31.1343, 29.9794] }
+  },
+  {
+    "id": "united_states",
+    "type": "polygon",
+    "label": "アメリカ合衆国（おおまか）",
+    "feature": {
+      "type": "Polygon",
+      "coordinates": [[
+        [-124.8, 24.5],
+        [-66.9, 24.5],
+        [-66.9, 49.4],
+        [-124.8, 49.4],
+        [-124.8, 24.5]
+      ]]
+    }
+  },
+  {
+    "id": "japan",
+    "type": "polygon",
+    "label": "日本（おおまか）",
+    "feature": {
+      "type": "Polygon",
+      "coordinates": [[
+        [122.0, 24.0],
+        [153.0, 24.0],
+        [153.0, 46.0],
+        [122.0, 46.0],
+        [122.0, 24.0]
+      ]]
+    }
+  }
+]

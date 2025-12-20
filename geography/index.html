@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>地理推測ゲーム — 楽しく勉強する</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.0.0/css/all.css">
+    <link rel="stylesheet" href="../assets/css/stylesheet.css">
+    <link rel="stylesheet" href="../assets/css/geoguess.css">
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script defer src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Turf.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/turf.min.js"></script>
+  </head>
+  <body>
+    <header class="site-header container" role="banner">
+      <a class="site-brand" href="../index.html">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="site-title">楽しく勉強する</span>
+      </a>
+      <nav class="site-nav" role="navigation" aria-label="主要メニュー">
+        <a href="../index.html">トップ</a>
+        <a href="../index.html#">コース</a>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <section id="geoguess" class="game-panel" aria-labelledby="game-title">
+        <h2 id="game-title" class="sr-only">地理推測ゲーム</h2>
+
+        <div class="game-top">
+          <div class="problem-number">問題 <span id="problem-number">1</span></div>
+          <div class="score-info">得点: <span id="score">0</span></div>
+        </div>
+
+        <div class="problem-area" aria-live="polite">
+          <div id="question-label" class="formula"></div>
+          <div id="map" class="map" role="application" aria-label="地図"></div>
+        </div>
+
+        <div class="answer-area">
+          <div class="map-instructions">地図をクリックしてピンを立て、回答ボタンを押してください。</div>
+          <div class="controls">
+            <button id="submit-answer" class="btn submit-btn" aria-label="回答する" disabled>回答</button>
+            <button id="next-question" class="btn" aria-label="次の問題" disabled>次へ</button>
+          </div>
+          <div id="message" class="game-message" aria-live="assertive"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer container" role="contentinfo">
+      <p>© 2025 楽しく勉強する</p>
+    </footer>
+
+    <script defer type="module" src="../assets/js/geoguess.js"></script>
+  </body>
+</html>
