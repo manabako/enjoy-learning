@@ -5,6 +5,7 @@ let questions = [];
 let interactionLocked = false;
 let current = 0;
 let totalScore = 0;
+const TOTAL_COUNT = 5;
 const MAX_SCORE = 1000;
 // length scale for exponential decay (km)
 const DECAY_KM = 1000;
@@ -18,6 +19,7 @@ function init() {
 function setupElements() {
   document.getElementById('submit-answer').addEventListener('click', submitAnswer);
   document.getElementById('next-question').addEventListener('click', nextQuestion);
+  document.getElementById('restart').addEventListener('click', restartQuestion);
 }
 
 function initMap() {
@@ -36,7 +38,7 @@ function initMap() {
 
 function loadQuestions() {
   fetch(questionsUrl).then(r => r.json()).then(data => {
-    questions = data;
+    questions = [...data].sort(() => Math.random() - 0.5).slice(0, TOTAL_COUNT);
     showQuestion(current);
   }).catch(err => {
     console.error(err);
@@ -66,7 +68,6 @@ function placeAnswer(latlng) {
   // Do nothing if interactions are locked after submitting an answer
   if (interactionLocked) return;
   const submitBtn = document.getElementById('submit-answer');
-  const nextBtn = document.getElementById('next-question');
 
   if (answerMarker) {
     answerMarker.setLatLng(latlng);
@@ -85,6 +86,7 @@ function submitAnswer() {
 
   const submitBtn = document.getElementById('submit-answer');
   const nextBtn = document.getElementById('next-question');
+  const restartBtn = document.getElementById('restart');
   submitBtn.style.display = 'none';
   // lock interactions (disable placing/moving pins) until the next question
   interactionLocked = true;
@@ -121,7 +123,13 @@ function submitAnswer() {
 
   document.getElementById('score').textContent = totalScore;
   // show next button (ensure it's visible by setting block to override CSS rule)
-  if (nextBtn) { nextBtn.style.display = 'block'; nextBtn.disabled = false; }
+  if (current + 1 === TOTAL_COUNT) {
+    restartBtn.style.display = 'block'; 
+    restartBtn.disabled = false; 
+  } else if (nextBtn) { 
+    nextBtn.style.display = 'block'; 
+    nextBtn.disabled = false; 
+  }
 }
 
 function scoreFromDistance(distance_km, inside=false) {
@@ -139,24 +147,30 @@ function showResultPoint(solPoint, ansPoint, distance_km, gained) {
   // line
   const ansLatLng = [ansPoint.geometry.coordinates[1], ansPoint.geometry.coordinates[0]];
   const solLatLng = [solLat, solLon];
-  lineLayer = L.polyline([ansLatLng, solLatLng], {color:'#2563eb', weight:4, dashArray: '1 6'}).addTo(map);
+  lineLayer = L.polyline(
+    [ansLatLng, solLatLng], 
+    {color:'#2563eb', weight:4, dashArray: '1 6'}
+  ).addTo(map);
 
   const msg = `距離: ${distance_km.toFixed(2)} km — 獲得: ${gained} 点`;
   document.getElementById('message').textContent = msg;
+  if (current + 1 === TOTAL_COUNT) {
+    const msgTotalScore = `合計得点: ${gained + totalScore} 点`;
+    document.getElementById('total-score-msg').textContent = msgTotalScore;
+  }
 }
 
 function showResultPolygon(poly, ansPoint, distance_km, gained, inside) {
   clearResultLayers();
   // show polygon
   solutionLayer = L.geoJSON(poly, {
-    style: {color: '#2563eb', weight:2, fillOpacity: 0.08}
+    style: {color: '#2563eb', weight:2, fillOpacity: 0.08, dashArray: '1 6'}
   }).addTo(map);
 
   // if outside, show nearest point on poly boundary and draw line
   const ansLatLng = [ansPoint.geometry.coordinates[1], ansPoint.geometry.coordinates[0]];
   if (inside) {
-    // place green marker on answer to show correctness
-    lineLayer = L.marker(ansLatLng, {icon: greenIcon()}).addTo(map);
+    // 点数表示
     const msg = `領域内 — 満点: ${gained} 点`;
     document.getElementById('message').textContent = msg;
   } else {
@@ -164,18 +178,23 @@ function showResultPolygon(poly, ansPoint, distance_km, gained, inside) {
     const polyLine = turf.polygonToLine(poly);
     const snapped = turf.nearestPointOnLine(polyLine, ansPoint, {units:'kilometers'});
     const snappedLatLng = [snapped.geometry.coordinates[1], snapped.geometry.coordinates[0]];
-    lineLayer = L.polyline([ansLatLng, snappedLatLng], {color:'#2563eb', weight:4, dashArray: '1 6'}).addTo(map);
-    L.marker(snappedLatLng, {icon: greenIcon()}).addTo(map);
-
+    lineLayer = L.polyline(
+      [ansLatLng, snappedLatLng], 
+      {color:'#2563eb', weight:4, dashArray: '1 6'}
+    ).addTo(map);
+    // 点数表示
     const msg = `境界までの距離: ${distance_km.toFixed(2)} km — 獲得: ${gained} 点`;
     document.getElementById('message').textContent = msg;
+  }
+  if (current + 1 === TOTAL_COUNT) {
+    const msgTotalScore = `合計得点: ${gained + totalScore} 点`;
+    document.getElementById('total-score-msg').textContent = msgTotalScore;
   }
 }
 
 function nextQuestion() {
   current = (current + 1) % questions.length;
   // remove answer marker and result layers
-  if (answerMarker) { map.removeLayer(answerMarker); answerMarker = null; }
   clearLayers();
   interactionLocked = false;
   showQuestion(current);
@@ -190,8 +209,26 @@ function clearLayers() {
 }
 
 function clearResultLayers() {
-  if (solutionLayer) { map.removeLayer(solutionLayer); solutionLayer = null; }
-  if (lineLayer) { map.removeLayer(lineLayer); lineLayer = null; }
+  if (solutionLayer) {
+    map.removeLayer(solutionLayer);
+    solutionLayer = null;
+  }
+  if (lineLayer) {
+    map.removeLayer(lineLayer);
+    lineLayer = null;
+  }
+}
+
+function restartQuestion() {
+  const restartBtn = document.getElementById('restart');
+  restartBtn.style.display = 'none';
+  current = 0;
+  totalScore = 0;
+  document.getElementById('score').textContent = totalScore;
+  document.getElementById('total-score-msg').textContent = '';
+  clearLayers();
+  interactionLocked = false;
+  loadQuestions();
 }
 
 function greenIcon() {
@@ -206,4 +243,4 @@ function greenIcon() {
 }
 
 // boot
-window.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', init);

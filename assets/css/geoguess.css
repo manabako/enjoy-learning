@@ -4,6 +4,14 @@
   display: block;
 }
 
+.next-btn {
+  display: none;
+}
+
+.restart-btn {
+  display: none;
+}
+
 .game-panel {
   max-width: 780px;
   margin: 0 auto 2rem auto;
@@ -71,6 +79,7 @@
   min-height: 1.2rem;
   font-weight: 600;
   color: var(--accent-600);
+  text-align: center;
 }
 
 @media (max-width: 540px) {
