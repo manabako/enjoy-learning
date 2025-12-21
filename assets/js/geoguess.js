@@ -155,7 +155,7 @@ function showResultPoint(solPoint, ansPoint, distance_km, gained) {
   const msg = `距離: ${distance_km.toFixed(2)} km — 獲得: ${gained} 点`;
   document.getElementById('message').textContent = msg;
   if (current + 1 === TOTAL_COUNT) {
-    const msgTotalScore = `合計得点: ${gained + totalScore} 点`;
+    const msgTotalScore = `合計得点: ${totalScore} 点`;
     document.getElementById('total-score-msg').textContent = msgTotalScore;
   }
 }
@@ -187,7 +187,7 @@ function showResultPolygon(poly, ansPoint, distance_km, gained, inside) {
     document.getElementById('message').textContent = msg;
   }
   if (current + 1 === TOTAL_COUNT) {
-    const msgTotalScore = `合計得点: ${gained + totalScore} 点`;
+    const msgTotalScore = `合計得点: ${totalScore} 点`;
     document.getElementById('total-score-msg').textContent = msgTotalScore;
   }
 }

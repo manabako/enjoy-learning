@@ -18,6 +18,12 @@
     "feature": { "type": "Point", "coordinates": [31.1343, 29.9794] }
   },
   {
+    "id": "eiffel_tower",
+    "type": "point",
+    "label": "エッフェル塔",
+    "feature": { "type": "Point", "coordinates": [2.2950, 48.8585] }
+  },
+  {
     "id": "united_states",
     "type": "polygon",
     "label": "アメリカ合衆国（おおまか）",
