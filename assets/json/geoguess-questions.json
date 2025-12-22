@@ -24,6 +24,60 @@
     "feature": { "type": "Point", "coordinates": [2.2950, 48.8585] }
   },
   {
+    "id": "mont_saint_michel",
+    "type": "point",
+    "label": "モン・サン＝ミシェル",
+    "feature": { "type": "Point", "coordinates": [-1.5113, 48.6361] }
+  },
+  {
+    "id": "colosseum",
+    "type": "point",
+    "label": "コロッセオ",
+    "feature": { "type": "Point", "coordinates": [12.4922, 41.8902] }
+  },
+  {
+    "id": "parthenon",
+    "type": "point",
+    "label": "パルテノン神殿",
+    "feature": { "type": "Point", "coordinates": [23.7267, 37.9715] }
+  },
+  {
+    "id": "machu_picchu",
+    "type": "point",
+    "label": "マチュ・ピチュ",
+    "feature": { "type": "Point", "coordinates": [-72.5453, -13.1632] }
+  },
+  {
+    "id": "taj_mahal",
+    "type": "point",
+    "label": "タージ・マハル",
+    "feature": { "type": "Point", "coordinates": [78.0421, 27.1751] }
+  },
+  {
+    "id": "schonbrunn_palace",
+    "type": "point",
+    "label": "シェーンブルン宮殿",
+    "feature": { "type": "Point", "coordinates": [16.3127, 48.1858] }
+  },
+  {
+    "id": "auschwitz_birkenau",
+    "type": "point",
+    "label": "アウシュヴィッツ・ビルケナウ博物館",
+    "feature": { "type": "Point", "coordinates": [19.2055, 50.0294] }
+  },
+  {
+    "id": "cologne_cathedral",
+    "type": "point",
+    "label": "ケルン大聖堂",
+    "feature": { "type": "Point", "coordinates": [6.9583, 50.9413] }
+  },
+  {
+    "id": "hagia_sophia",
+    "type": "point",
+    "label": "アヤソフィア",
+    "feature": { "type": "Point", "coordinates": [28.9802, 41.0085] }
+  },
+  {
     "id": "united_states",
     "type": "polygon",
     "label": "アメリカ合衆国（おおまか）",
