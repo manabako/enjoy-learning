@@ -8,16 +8,35 @@ const el = {
   timerBar: document.getElementById('timer-bar'),
   timeRemaining: document.getElementById('time-remaining'),
   swatch: document.getElementById('swatch'),
-  problemNumber: document.getElementById('problem-number'),
   choices: document.getElementById('choices'),
   result: document.getElementById('result'),
-  score: document.getElementById('score')
+  score: document.getElementById('score'),
+  levelDisplay: document.getElementById('select-display')
 };
 
 let colors = [];
 
 const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 const shuffle = (arr) => { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; };
+const escapeHtml = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+function getSelectedLevel() {
+  try {
+    const url = new URL(window.location.href);
+    const param = url.searchParams.get('level');
+    const stored = sessionStorage.getItem('colorGameLevel');
+    const lvl = param ? Number(param) : (stored ? Number(stored) : null);
+    if (![1,2,3].includes(lvl)) {
+      // no valid level chosen -> go to selector
+      window.location.href = 'select.html';
+      return null;
+    }
+    return lvl;
+  } catch (e) {
+    window.location.href = 'select.html';
+    return null;
+  }
+}
 
 function startTimer() {
   const start = Date.now();
@@ -68,7 +87,7 @@ function renderProblem() {
     li.setAttribute('tabindex', '0');
     li.dataset.name = item.name;
     li.setAttribute('aria-pressed', 'false');
-    li.textContent = item.name;
+    li.innerHTML = `<div class="yomi">${escapeHtml(item.yomi || '')}</div><div class="name">${escapeHtml(item.name)}</div>`;
     li.addEventListener('click', () => handleChoice(li));
     li.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleChoice(li); } });
     el.choices.appendChild(li);
@@ -83,14 +102,14 @@ function handleChoice(li) {
   const correct = current.correct.name;
   if (chosen === correct) {
     score++;
-    el.result.textContent = '✅ 正解！ 次の問題へ';
-    el.result.style.color = 'green';
+    el.result.textContent = '正解！ 次の問題へ';
+    el.result.style.color = '#2563eb';
     el.score.textContent = score;
     // highlight correct
     li.classList.add('selected');
     setTimeout(() => loadNextProblem(), 600);
   } else {
-    el.result.textContent = '❌ 不正解。次に進みます…';
+    el.result.textContent = '不正解。次に進みます…';
     el.result.style.color = 'red';
     // briefly show correct and move on
     const items = Array.from(el.choices.querySelectorAll('.choice'));
@@ -103,13 +122,22 @@ function handleChoice(li) {
 }
 
 async function init() {
+  const level = getSelectedLevel();
+  if (!level) return; // redirected to selector
+  el.levelDisplay.textContent = level;
+
   try {
     const resp = await fetch('../assets/json/colors.json');
     if (!resp.ok) throw new Error('fetch failed');
-    colors = await resp.json();
+    const all = await resp.json();
+    colors = all.filter(c => Number(c.level) === Number(level));
+    if (!colors || colors.length === 0) {
+      console.warn(`No colors found for level ${level}, falling back to full list.`);
+      colors = all;
+    }
   } catch (e) {
     console.error('colors.json load failed', e);
-    el.problemNumber.textContent = 'データの読み込みに失敗しました。';
+    el.result.textContent = 'データの読み込みに失敗しました。';
     return;
   }
 

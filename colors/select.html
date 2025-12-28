@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>色当てゲーム — 楽しく勉強する</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/stylesheet.css" />
+    <link rel="stylesheet" href="../assets/css/select.css" />
+  </head>
+  <body>
+    <header class="site-header container" role="banner">
+      <a class="site-brand" href="../index.html">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="site-title">楽しく勉強する</span>
+      </a>
+      <nav class="site-nav" role="navigation" aria-label="主要メニュー">
+        <a href="../index.html">トップ</a>
+        <a href="../index.html#">コース</a>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <section class="mode-panel">
+        <div class="hero-card">
+          <h2 class="kicker">色当てゲーム</h2>
+          <h1 class="animate-fade-up is-visible">レベルを選択</h1>
+          <p class="mode-desc">難易度は色の知名度に基づいて1〜3で分けられています。好みのレベルを選んでゲームを始めてください。</p>
+        </div>
+
+        <div class="mode-row">
+          <button class="mode-card" data-level="1" aria-label="レベル1 かんたん">
+            <div class="mode-title">レベル 1</div>
+            <div class="mode-desc">白・黒・赤など、よく知られた色が中心です。</div>
+          </button>
+
+          <button class="mode-card" data-level="2" aria-label="レベル2 ふつう">
+            <div class="mode-title">レベル 2</div>
+            <div class="mode-desc">やや専門的な色名（桜色・抹茶色など）が出ます。</div>
+          </button>
+
+          <button class="mode-card" data-level="3" aria-label="レベル3 むずかしい">
+            <div class="mode-title">レベル 3</div>
+            <div class="mode-desc">古語的／詩的な色名が中心です（緋色・萌葱色など）。</div>
+          </button>
+        </div>
+
+        <div class="small-note">選択すると自動でゲームが開始します。戻る場合はブラウザの戻るを使ってください。</div>
+      </section>
+    </main>
+
+    <footer class="site-footer container" role="contentinfo">
+      <p>© 2025 楽しく勉強する</p>
+    </footer>
+
+    <script type="module" src="../assets/js/mode-select.js"></script>
+  </body>
+</html>

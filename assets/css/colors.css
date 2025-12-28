@@ -13,6 +13,12 @@
     gap:.75rem;
 }
 
+.ploblem-label{
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+}
+
 .problem-number {
   font-weight:700;
   color:var(--muted);
@@ -23,6 +29,19 @@
 .problem-number .score {
   font-weight:700;
   color:var(--accent);
+}
+
+.level-label {
+  font-weight:600;
+  color:var(--muted);
+  font-size:.9rem;
+  margin-top:2px;
+}
+
+.btn-change {
+  margin-left:.6rem;
+  padding:.28rem .5rem;
+  font-size:.85rem;
 }
 
 .problem-area {
@@ -36,13 +55,15 @@
   justify-content:center;
   flex-direction:column;
   gap:.6rem;
+  justify-content: space-between;
 }
+
 
 .swatch {
   width:80%;
-  height:120px;
+  height:140px;
   border-radius:10px;
-  border:6px solid #808080;
+  border:12px solid #808080;
   box-shadow:var(--shadow-sm);
 }
 
@@ -68,9 +89,10 @@
 
 .choice {
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:.7rem;
+  padding:1rem;
   border-radius:10px;
   background:var(--card);
   border:1px solid rgba(15,23,42,0.04);
@@ -78,9 +100,18 @@
   cursor:pointer;
   user-select:none;
   transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
-  font-weight:600;
 }
-
+.choice .yomi {
+  font-size: .5rem;
+  color: var(--muted);
+  line-height: 1;
+}
+.choice .name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: .18rem;
+  line-height: 1;
+}
 .choice[aria-pressed="true"],
 .choice.selected {
   background: var(--choice-bg);

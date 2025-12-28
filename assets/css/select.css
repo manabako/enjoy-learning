@@ -1,0 +1,57 @@
+/* Small adjustments for the level selector */
+.mode-panel {
+  max-width: 90%;
+  margin: 2.5rem auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.mode-card {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  padding: 1.5rem 1rem;
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+  border: none;
+}
+
+.mode-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-title {
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+
+.mode-desc {
+  color: var(--muted);
+  font-size: .92rem;
+  text-align: left;
+}
+
+.mode-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .8rem;
+}
+
+.small-note {
+  color: var(--muted);
+  text-align: left;
+  margin-top: .6rem;
+}
+
+@media (max-width: 640px) {
+  .mode-row {
+     grid-template-columns: 1fr;
+  }
+}
