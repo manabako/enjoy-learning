@@ -1,0 +1,121 @@
+const DURATION = 60;
+let remaining = DURATION;
+let timerInterval = null;
+let score = 0;
+let current = null; // { correct, choices: [...] }
+
+const el = {
+  timerBar: document.getElementById('timer-bar'),
+  timeRemaining: document.getElementById('time-remaining'),
+  swatch: document.getElementById('swatch'),
+  problemNumber: document.getElementById('problem-number'),
+  choices: document.getElementById('choices'),
+  result: document.getElementById('result'),
+  score: document.getElementById('score')
+};
+
+let colors = [];
+
+const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const shuffle = (arr) => { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; };
+
+function startTimer() {
+  const start = Date.now();
+  remaining = DURATION;
+  el.timeRemaining.textContent = remaining;
+  updateTimerBar(1);
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    const elapsed = (Date.now() - start) / 1000;
+    remaining = Math.max(0, Math.ceil(DURATION - elapsed));
+    el.timeRemaining.textContent = remaining;
+    const ratio = Math.max(0, (DURATION - elapsed) / DURATION);
+    updateTimerBar(ratio);
+    if (elapsed >= DURATION) {
+      clearInterval(timerInterval);
+      finishGame();
+    }
+  }, 200);
+}
+function updateTimerBar(ratio) { el.timerBar.style.width = `${Math.round(ratio * 100)}%`; }
+
+function finishGame() {
+  setTimeout(()=> {
+    alert(`時間切れ！ 正解数: ${score}`);
+    window.location.reload();
+  }, 50);
+}
+
+function loadNextProblem() {
+  if (!colors.length) return;
+  const correct = colors[randInt(0, colors.length - 1)];
+  // pick three distractors
+  const others = shuffle(colors.filter(c => c.name !== correct.name)).slice(0, 3);
+  const choices = shuffle([correct, ...others]);
+  current = { correct, choices };
+  renderProblem();
+}
+
+function renderProblem() {
+  el.swatch.style.background = current.correct.hex;
+  el.swatch.style.borderColor = '#808080'; // 50% gray
+
+  el.choices.innerHTML = '';
+  current.choices.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'choice';
+    li.setAttribute('role', 'option');
+    li.setAttribute('tabindex', '0');
+    li.dataset.name = item.name;
+    li.setAttribute('aria-pressed', 'false');
+    li.textContent = item.name;
+    li.addEventListener('click', () => handleChoice(li));
+    li.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleChoice(li); } });
+    el.choices.appendChild(li);
+  });
+
+  el.result.textContent = '';
+}
+
+function handleChoice(li) {
+  if (li.classList.contains('disabled')) return;
+  const chosen = li.dataset.name;
+  const correct = current.correct.name;
+  if (chosen === correct) {
+    score++;
+    el.result.textContent = '✅ 正解！ 次の問題へ';
+    el.result.style.color = 'green';
+    el.score.textContent = score;
+    // highlight correct
+    li.classList.add('selected');
+    setTimeout(() => loadNextProblem(), 600);
+  } else {
+    el.result.textContent = '❌ 不正解。次に進みます…';
+    el.result.style.color = 'red';
+    // briefly show correct and move on
+    const items = Array.from(el.choices.querySelectorAll('.choice'));
+    items.forEach(it => { it.classList.add('disabled'); });
+    // reveal correct choice visually
+    const correctEl = Array.from(el.choices.querySelectorAll('.choice')).find(it => it.dataset.name === correct);
+    if (correctEl) correctEl.classList.add('selected');
+    setTimeout(() => loadNextProblem(), 900);
+  }
+}
+
+async function init() {
+  try {
+    const resp = await fetch('../assets/json/colors.json');
+    if (!resp.ok) throw new Error('fetch failed');
+    colors = await resp.json();
+  } catch (e) {
+    console.error('colors.json load failed', e);
+    el.problemNumber.textContent = 'データの読み込みに失敗しました。';
+    return;
+  }
+
+  loadNextProblem();
+  startTimer();
+}
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+else init();

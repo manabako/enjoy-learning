@@ -1,0 +1,113 @@
+/* Colors game styles */
+.game-panel {
+    max-width: 520px;
+    margin: 0 auto 2rem auto;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+}
+
+.game-top {
+    display:flex;
+    align-items:center;
+    gap:.75rem;
+}
+
+.problem-number {
+  font-weight:700;
+  color:var(--muted);
+  font-size:.95rem;
+  margin-top:6px;
+}
+
+.problem-number .score {
+  font-weight:700;
+  color:var(--accent);
+}
+
+.problem-area {
+  background:var(--card);
+  padding:1rem;
+  border-radius:12px;
+  box-shadow:var(--shadow-sm);
+  min-height:140px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:.6rem;
+}
+
+.swatch {
+  width:80%;
+  height:120px;
+  border-radius:10px;
+  border:6px solid #808080;
+  box-shadow:var(--shadow-sm);
+}
+
+.swatch-hex {
+  font-size:.85rem;
+  color:var(--muted);
+}
+
+.answer-area {
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+}
+
+.choices {
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:.6rem;
+}
+
+.choice {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:.7rem;
+  border-radius:10px;
+  background:var(--card);
+  border:1px solid rgba(15,23,42,0.04);
+  box-shadow:var(--shadow-sm);
+  cursor:pointer;
+  user-select:none;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  font-weight:600;
+}
+
+.choice[aria-pressed="true"],
+.choice.selected {
+  background: var(--choice-bg);
+  border-color: var(--choice-border);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16,24,40,0.06);
+}
+
+.choice.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.controls {
+  display:flex;
+  gap:.5rem;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.result {
+  min-height:1.2rem;
+  text-align:center;
+  font-weight:700;
+  color:inherit;
+}
+
+@media (max-width:540px) {
+  .choices { grid-template-columns: repeat(2, 1fr); }
+}
