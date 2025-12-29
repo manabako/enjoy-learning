@@ -14,31 +14,6 @@
   gap: .75rem;
 }
 
-.timer {
-  flex: 1 1 auto;
-  height: 12px;
-  background: rgba(15,23,42,0.06);
-  border-radius: 999px;
-  overflow: hidden;
-  position: relative;
-}
-.timer-bar {
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  left: 0;
-  background: linear-gradient(90deg, var(--accent-600), var(--accent));
-  width: 100%;
-  transform-origin: right center;
-  transition: width 200ms linear;
-}
-
-.timer-label {
-  min-width: 86px;
-  text-align: right;
-  color: var(--muted);
-  font-size: .95rem;
-}
-
 .problem-area {
   background: var(--card);
   padding: 1rem;
