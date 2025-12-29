@@ -9,6 +9,7 @@
 }
 
 .mode-card.tag {
+  color: var(--text);
   padding: 1rem;
   border-radius: 12px;
   background: var(--card);
