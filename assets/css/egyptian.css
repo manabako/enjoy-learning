@@ -1,0 +1,19 @@
+/* Egyptian game styles */
+@font-face {
+  font-family: 'EgyptianText';
+  src: url('../fonts/eot.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+.egyptian {
+  font-family:'EgyptianText', sans-serif, ui-sans-serif, system-ui;
+}
+
+.furigana {
+  font-family: 'EgyptianText', 'Noto Sans JP', sans-serif, ui-sans-serif, system-ui;
+}
+
+.choice {
+  font-family:'EgyptianText', sans-serif, ui-sans-serif, system-ui;
+}
