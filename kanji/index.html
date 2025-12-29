@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>漢字の読み — ゲーム</title>
+    <link rel="stylesheet" href="../assets/css/stylesheet.css" />
+    <link rel="stylesheet" href="../assets/css/kanji.css" />
+  </head>
+  <body>
+    <header class="site-header container" role="banner">
+      <a class="site-brand" href="../index.html">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="site-title">楽しく勉強する</span>
+      </a>
+      <nav class="site-nav" role="navigation" aria-label="主要メニュー">
+        <a href="../index.html">トップ</a>
+        <a href="select.html">ジャンル選択</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="game-panel" aria-labelledby="kanji-title">
+        <h2 id="kanji-title" class="sr-only">漢字読みゲーム</h2>
+
+        <div class="game-top">
+          <div class="timer" title="残り時間">
+            <div id="timer-bar" class="timer-bar"></div>
+          </div>
+          <div class="timer-label">拡大率 <span id="scale-percent">1.0</span>x</div>
+        </div>
+
+        <div class="problem-area" aria-live="polite">
+          <div class="problem-number">問題 <span id="problem-number">1</span></div>
+          <div id="furigana" class="furigana" aria-hidden="true"></div>
+          <div id="kanji" class="kanji">読み込み中…</div>
+        </div>
+
+        <div class="answer-area">
+          <ul id="choices" class="choices" role="listbox" aria-label="選択肢"></ul>
+
+          <div class="controls">
+            <div id="result" class="result" aria-live="polite"></div>
+            <button id="restart" class="btn restart" hidden>再挑戦</button>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <footer class="site-footer container" role="contentinfo">
+      <p>© 2025 楽しく勉強する</p>
+    </footer>
+
+    <script type="module" src="../assets/js/kanji.js"></script>
+  </body>
+</html>

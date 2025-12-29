@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>漢字の読み — ジャンル選択</title>
+    <link rel="stylesheet" href="../assets/css/stylesheet.css" />
+    <style>
+      .tag-grid { display:flex; flex-wrap:wrap; gap:.5rem; margin:.75rem 0; }
+      .tag { padding:.45rem .7rem; border-radius:999px; border:1px solid rgba(15,23,42,0.06); background:var(--card); cursor:pointer; user-select:none; }
+      .tag.active { background:var(--accent-100); border-color:var(--accent-400); color:var(--accent-800); }
+      .start { margin-top:1rem; display:inline-flex; gap:.5rem; align-items:center; }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1>ジャンルを選択</h1>
+      <p>遊びたいジャンル（タグ）を選んで「開始」ボタンを押してください。</p>
+      <div id="tags" class="tag-grid" aria-label="タグ一覧">読み込み中…</div>
+
+      <div>
+        <button id="start" class="btn start">開始</button>
+        <a href="../index.html" style="margin-left:1rem">戻る</a>
+      </div>
+    </main>
+
+    <script>
+      async function loadTags() {
+        const res = await fetch('../assets/json/kanji.json');
+        const data = await res.json();
+        const set = new Set();
+        data.forEach(x => (x.tags||[]).forEach(t => set.add(t)));
+        const container = document.getElementById('tags');
+        container.innerHTML = '';
+        Array.from(set).sort().forEach(tag => {
+          const btn = document.createElement('button');
+          btn.className = 'tag';
+          btn.type = 'button';
+          btn.textContent = tag;
+          btn.addEventListener('click', () => btn.classList.toggle('active'));
+          container.appendChild(btn);
+        });
+      }
+      document.getElementById('start').addEventListener('click', () => {
+        const active = Array.from(document.querySelectorAll('.tag.active')).map(b => b.textContent);
+        const params = new URLSearchParams();
+        if (active.length) params.set('tags', active.join(','));
+        window.location.href = 'index.html?' + params.toString();
+      });
+      loadTags().catch(e => { document.getElementById('tags').textContent = '読み込みに失敗しました。'; console.error(e)});
+    </script>
+  </body>
+</html>
