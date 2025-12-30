@@ -37,8 +37,23 @@ function initMap() {
 }
 
 function loadQuestions() {
+  const params = new URLSearchParams(window.location.search);
+  const tagsParam = params.get('tags');
+  const selectedTags = tagsParam ? tagsParam.split(',').map(s => s.trim()).filter(Boolean) : [];
+
   fetch(questionsUrl).then(r => r.json()).then(data => {
-    questions = [...data].sort(() => Math.random() - 0.5).slice(0, TOTAL_COUNT);
+    // filter by tags if provided
+    let pool = data;
+    if (selectedTags.length) {
+      const filtered = data.filter(q => (q.tags || []).some(t => selectedTags.includes(t)));
+      if (filtered.length) {
+        pool = filtered;
+      } else {
+        document.getElementById('message').textContent = '選択タグに該当する問題は見つかりませんでした。全問題から出題します。';
+      }
+    }
+
+    questions = [...pool].sort(() => Math.random() - 0.5).slice(0, TOTAL_COUNT);
     showQuestion(current);
   }).catch(err => {
     console.error(err);
