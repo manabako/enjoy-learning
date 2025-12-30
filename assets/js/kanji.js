@@ -2,7 +2,7 @@
 
 const HIRAGANA_POOL = Array.from('あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんゃゅょぁぃぅぇぉ');
 const JSON_PATH_DEFAULT = '../assets/json/kanji.json';
-const MAX_SCALE = 3;
+const MAX_SCALE = 4;
 const BASE_SPEED_INIT = 0.00025;
 
 // elements

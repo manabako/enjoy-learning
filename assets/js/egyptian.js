@@ -2,7 +2,7 @@
 
 const EGYPTIAN_POOL = Array.from('ꜣꞽïyꜥwbpfmnrhḥḫẖzsšqkgtṯdḏ');
 const JSON_PATH_DEFAULT = '../assets/json/egyptian.json';
-const MAX_SCALE = 3;
+const MAX_SCALE = 4;
 const BASE_SPEED_INIT = 0.00025;
 
 // elements
