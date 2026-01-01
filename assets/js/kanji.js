@@ -166,6 +166,7 @@ async function init() {
   el.scalePercent = document.getElementById('scale-percent');
   el.timerBar = document.getElementById('timer-bar');
   el.restartBtn = document.getElementById('restart');
+  el.problemNumber = document.getElementById('problem-number');
 
   const jsonPath = JSON_PATH_DEFAULT;
   let data;
