@@ -1,10 +1,10 @@
 // game.jsから分離した問題生成ロジック
-export function randInt(min, max) {
+export const randInt = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // ログの計算
-export function calLog() {
+const calLog = () => {
   const base = randInt(2, 5);
   const flag = randInt(0,4);
   if (flag === 0) {
@@ -35,7 +35,7 @@ export function calLog() {
 }
 
 // 積分の計算
-export function calIntegral() {
+const calIntegral = () => {
   const n = randInt(1,5);
   const toA = n * randInt(1,2);
   let solution;
@@ -87,7 +87,7 @@ export function calIntegral() {
 
 
 // 微分の計算
-export function calDifferential() {
+const calDifferential = () => {
   const flag = randInt(0,2);
   if (flag === 0) {
     const n = randInt(1,3);
@@ -121,7 +121,7 @@ export function calDifferential() {
 }
 
 // 三角関数の計算
-export function calTrigonometric() {
+const calTrigonometric = () => {
   const thetaMap = ["0","\\pi","\\frac{\\pi}{2}","\\frac{\\pi}{3}","\\frac{\\pi}{4}","\\frac{\\pi}{6}"];
   const flag = randInt(0,2);
   if (flag === 0) { // 恒等式
@@ -154,7 +154,7 @@ export function calTrigonometric() {
 }
 
 // 組み合わせ・順列・階乗の計算
-export function calCombination() {
+const calCombination = () => {
   const flag = randInt(0,3);
   if (flag === 0) { // n!, n!!
     const n = randInt(0,5);
@@ -188,7 +188,7 @@ export function calCombination() {
 }
 
 // 数列の和の計算
-export function calSequence() {
+const calSequence = () => {
   const flag = randInt(0,1);
   if (flag === 0) {
     const a = randInt(2,10); const r = randInt(2,3); const n = randInt(2,4);
@@ -202,7 +202,7 @@ export function calSequence() {
 }
 
 // 天井関数・床関数の計算
-export function calFloorCeil() {
+function calFloorCeil() {
   const tuples = [[Math.E, 'e'], [Math.PI, '\\pi'], [Math.SQRT2, '\\sqrt{2}']];
   const idx = randInt(0,2);
   let [x,xs] = tuples[idx];
@@ -214,7 +214,7 @@ export function calFloorCeil() {
 }
 
 // 行列式の計算
-export function calDet() {
+const calDet = () => {
   const flag = randInt(0,1);
   if (flag === 0) {
     const a11 = randInt(0,8), a12 = randInt(0,8), a21 = randInt(0,8), a22 = randInt(0,8);
@@ -237,7 +237,7 @@ export function calDet() {
 }
 
 // 複素数の計算
-export function calComplex() {
+const calComplex = () => {
   const flag = 0;
   if (flag === 0) {
     const a = randInt(1,5); const b = randInt(1,5);
@@ -249,7 +249,7 @@ export function calComplex() {
 }
 
 // 極限の計算
-export function calLimit() {
+const calLimit = () => {
   const flag = randInt(0,1);
   if (flag === 0) {
     return { solution: 1, formula: `\\lim_{x\\to 0} \\frac{\\sin x}{x}`};
