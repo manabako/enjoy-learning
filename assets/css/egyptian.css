@@ -3,7 +3,7 @@
   font-family: 'EgyptianText';
   src: url('../fonts/eot.ttf') format('truetype');
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 .egyptian {

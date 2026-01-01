@@ -135,6 +135,8 @@ function updateBar(){
 
 function gameOver(){
   paused = true;
+  const r = currentEntry().tl;
+  if(el.furigana) el.furigana.textContent = r.split('').join(' ')
   if(rafId) cancelAnimationFrame(rafId);
   if(el.result) el.result.textContent = `終了！ 正解数: ${score}`;  // clear any pending next-question timeouts so we don't hide the restart button
   if(pendingNextTimeout){ clearTimeout(pendingNextTimeout); pendingNextTimeout = null; }  if(el.choices) Array.from(el.choices.children).forEach(c => c.classList.add('disabled'));
