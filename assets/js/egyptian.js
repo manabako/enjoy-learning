@@ -175,7 +175,7 @@ async function init() {
     return;
   }
 
-  const tags = ["ME"];
+  const tags = getQueryTags();
   pool = tags.length ? data.filter(x => (x.tags||[]).some(t=>tags.includes(t))) : data.slice();
   if(!pool.length){ if(el.egyptian) el.egyptian.textContent = '該当する問題が見つかりません。ジャンル選択に戻ってください。'; return; }
   shuffle(pool);
