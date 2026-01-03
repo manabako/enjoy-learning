@@ -99,7 +99,7 @@ function handleChoice(elm, value){
         startQuestion();
       }, 700);
     } else {
-      setTimeout(()=> setChoicesForNextChar(), 250);
+      setTimeout(()=> setChoicesForNextChar(), 125);
       if(el.result) el.result.textContent = '';
     }
   } else {
