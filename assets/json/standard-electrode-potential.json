@@ -1,0 +1,19 @@
+[
+    {"sep": "-3.045 [V]", "name": "リチウム", "symbol": "Li"},
+    {"sep": "-2.925 [V]", "name": "カリウム", "symbol": "K"},
+    {"sep": "-2.840 [V]", "name": "カルシウム", "symbol": "Ca"},
+    {"sep": "-2.714 [V]", "name": "ナトリウム", "symbol": "Na"},
+    {"sep": "-2.356 [V]", "name": "マグネシウム", "symbol": "Mg"},
+    {"sep": "-1.662 [V]", "name": "アルミニウム", "symbol": "Al"},
+    {"sep": "-0.763 [V]", "name": "亜鉛", "symbol": "Zn"},
+    {"sep": "-0.440 [V]", "name": "鉄", "symbol": "Fe"},
+    {"sep": "-0.257 [V]", "name": "ニッケル", "symbol": "Ni"},
+    {"sep": "-0.138 [V]", "name": "スズ", "symbol": "Sn"},
+    {"sep": "-0.126 [V]", "name": "鉛", "symbol": "Pb"},
+    {"sep": "0.000 [V]", "name": "水素", "symbol": "H"},
+    {"sep": "0.337 [V]", "name": "銅", "symbol": "Cu"},
+    {"sep": "0.796 [V]", "name": "水銀", "symbol": "Hg"},
+    {"sep": "0.799 [V]", "name": "銀", "symbol": "Ag"},
+    {"sep": "1.188 [V]", "name": "白金", "symbol": "Pt"},
+    {"sep": "1.520 [V]", "name": "金", "symbol": "Au"}
+]

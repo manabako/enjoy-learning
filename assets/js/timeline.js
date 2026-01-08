@@ -323,6 +323,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             measurement: 'measurement',
             chokusenwakashu: 'chokusenwakashu',
             elements: 'elements',
+            sel: 'standard-electrode-potential',
             countries: 'countries',
             genji: 'genji-monogatari'
         });
