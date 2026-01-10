@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ペアを作る — ゲーム</title>
+    <link rel="stylesheet" href="../assets/css/stylesheet.css" />
+    <link rel="stylesheet" href="../assets/css/timer.css" />
+    <link rel="stylesheet" href="../assets/css/pair.css" />
+  </head>
+  <body>
+    <header class="site-header container" role="banner">
+      <a class="site-brand" href="../index.html">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="site-title">楽しく勉強する</span>
+      </a>
+      <nav class="site-nav" role="navigation" aria-label="主要メニュー">
+        <a href="../index.html">トップ</a>
+        <a href="select.html">ジャンル選択</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="game-panel" aria-labelledby="pair-title">
+        <h2 id="pair-title" class="sr-only">正しいペアを作るゲーム</h2>
+
+        <div class="game-top">
+          <div class="timer" title="残り時間">
+            <div id="timer-bar" class="timer-bar"></div>
+          </div>
+          <div class="timer-label">残り <span id="time-remaining">60</span>s</div>
+        </div>
+
+        <div class="score-area">
+          <div class="problem-number">作成したペア <span id="score">0</span></div>
+        </div>
+
+        <div class="match-board" role="application" aria-label="マッチングボード">
+          <div class="column left" id="left-column" aria-label="左の項目" role="listbox"></div>
+          <div class="column right" id="right-column" aria-label="右の項目" role="listbox"></div>
+        </div>
+
+        <div class="result" id="message" aria-live="polite"></div>
+
+        <div class="controls">
+          <button id="restart" class="btn restart" hidden>再挑戦</button>
+        </div> 
+
+      </section>
+    </main>
+
+    <footer class="site-footer container" role="contentinfo">
+      <p>© 2025 楽しく勉強する</p>
+    </footer>
+
+    <script type="module" src="../assets/js/pair.js"></script>
+  </body>
+</html>
