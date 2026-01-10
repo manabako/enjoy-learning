@@ -99,7 +99,7 @@ function handleChoice(elm, value){
         startQuestion();
       }, 700);
     } else {
-      setTimeout(()=> setChoicesForNextChar(), 250);
+      setTimeout(()=> setChoicesForNextChar(), 125);
       if(el.result) el.result.textContent = '';
     }
   } else {
@@ -135,6 +135,8 @@ function updateBar(){
 
 function gameOver(){
   paused = true;
+  const r = currentEntry().tl;
+  if(el.furigana) el.furigana.textContent = r.split('').join(' ')
   if(rafId) cancelAnimationFrame(rafId);
   if(el.result) el.result.textContent = `終了！ 正解数: ${score}`;  // clear any pending next-question timeouts so we don't hide the restart button
   if(pendingNextTimeout){ clearTimeout(pendingNextTimeout); pendingNextTimeout = null; }  if(el.choices) Array.from(el.choices.children).forEach(c => c.classList.add('disabled'));
@@ -164,6 +166,7 @@ async function init() {
   el.scalePercent = document.getElementById('scale-percent');
   el.timerBar = document.getElementById('timer-bar');
   el.restartBtn = document.getElementById('restart');
+  el.problemNumber = document.getElementById('problem-number');
 
   const jsonPath = JSON_PATH_DEFAULT;
   let data;
@@ -175,7 +178,7 @@ async function init() {
     return;
   }
 
-  const tags = ["ME"];
+  const tags = getQueryTags();
   pool = tags.length ? data.filter(x => (x.tags||[]).some(t=>tags.includes(t))) : data.slice();
   if(!pool.length){ if(el.egyptian) el.egyptian.textContent = '該当する問題が見つかりません。ジャンル選択に戻ってください。'; return; }
   shuffle(pool);

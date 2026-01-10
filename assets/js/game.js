@@ -19,14 +19,14 @@ const el = {
   message: document.getElementById('message')
 };
 
-function newProblem() {
+const newProblem = () => {
   const idx = randInt(0, generators.length - 1);
   const { solution, formula } = generators[idx]();
   currentSolution = solution;
   renderFormula(formula);
 }
 
-function renderFormula(latex) {
+const renderFormula = latex => {
   // use KaTeX to render into #formula
   try {
     katex.render(latex, el.formula, { throwOnError: false, displayMode: true });
@@ -35,7 +35,7 @@ function renderFormula(latex) {
   }
 }
 
-function startTimer() {
+const startTimer = () => {
   const start = Date.now();
   remaining = DURATION;
   el.timeRemaining.textContent = remaining;
@@ -54,14 +54,14 @@ function startTimer() {
   }, 200);
 }
 
-function updateTimerBar(ratio) {
+const updateTimerBar = ratio => {
   el.timerBar.style.width = `${Math.round(ratio * 100)}%`;
   // animate color change near end
   if (ratio < 0.25) el.timerBar.style.filter = 'hue-rotate(-20deg)';
   else el.timerBar.style.filter = '';
 }
 
-function finishGame() {
+const finishGame = () => {
   const finalNum = solvedCount;
   setTimeout(()=> {
     alert(`時間切れ！ 解いた問題数: ${finalNum}`);
@@ -70,17 +70,26 @@ function finishGame() {
   }, 50);
 }
 
-function setMessage(text, duration=1200) {
+const setMessage = (text, duration=1200) => {
   el.message.textContent = text;
-  if (duration>0) setTimeout(()=> { if (el.message.textContent === text) el.message.textContent = ''; }, duration);
+  if (duration>0) setTimeout(() => { 
+    if (el.message.textContent === text) el.message.textContent = ''; 
+  }, duration);
 }
 
-function submitAnswer() {
+const submitAnswer = () => {
   const val = el.answerInput.value.trim();
-  if (val === '') { setMessage('答えを入力してください'); return; }
+  if (val === '') { 
+    setMessage('答えを入力してください'); 
+    return; 
+  }
   // parse as number (allow negative)
   const num = Number(val);
-  if (Number.isNaN(num)) { setMessage('数値で入力してください'); el.answerInput.value = ''; return; }
+  if (Number.isNaN(num)) { 
+    setMessage('数値で入力してください'); 
+    el.answerInput.value = ''; 
+    return; 
+  }
   if (Math.abs(num - currentSolution) < 1e-6) {
     // correct
     solvedCount++;
@@ -97,7 +106,7 @@ function submitAnswer() {
 }
 
 // tenkey handlers
-function onTenkeyClick(e) {
+const onTenkeyClick = e => {
   if (!e.target.classList.contains('tk')) return;
   const v = e.target.textContent;
   const input = el.answerInput;
@@ -160,14 +169,13 @@ function onTenkeyClick(e) {
   input.focus();
 }
 
-  function isTouchDevice() {
+const isTouchDevice = () => {
   return ('ontouchstart' in window) ||
           (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
           (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0);
 }
 
-// init
-function init() {
+const setAnwerInput = () => {
   const touchOnly = isTouchDevice();
 
   if (touchOnly) {
@@ -176,7 +184,10 @@ function init() {
     el.answerInput.setAttribute('inputmode', 'none');
     el.answerInput.classList.add('touch-only');
     // タッチ開始でフォーカス移動やスクロール暴発を防ぐ
-    el.answerInput.addEventListener('touchstart', (e) => { e.preventDefault(); }, { passive: false });
+    el.answerInput.addEventListener('touchstart',
+       (e) => { e.preventDefault(); }, 
+       { passive: false }
+      );
   } else {
     // PC：キーボード入力を有効にする
     el.answerInput.removeAttribute('readonly');
@@ -187,7 +198,9 @@ function init() {
     el.answerInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') { submitAnswer(); return; }
       // 許可する制御キー
-      const allowedControls = ['Backspace','Delete','ArrowLeft','ArrowRight','Tab','Home','End'];
+      const allowedControls = [
+        'Backspace','Delete','ArrowLeft','ArrowRight','Tab','Home','End'
+      ];
       if (allowedControls.includes(e.key)) return;
       // マイナスは先頭のみ
       if (e.key === '-') {
@@ -205,13 +218,10 @@ function init() {
     }, { passive: false });
   }
 
-  // 共通初期化
-  newProblem();
-  startTimer();
   el.tenkey.addEventListener('click', onTenkeyClick);
   el.submitBtn.addEventListener('click', submitAnswer);
 
-  // input のサニタイズ（既存の input イベントハンドラが無ければここで追加）
+    // input のサニタイズ（既存の input イベントハンドラが無ければここで追加）
   el.answerInput.addEventListener('input', () => {
     let v = el.answerInput.value;
     const firstMinus = v.indexOf('-');
@@ -227,8 +237,15 @@ function init() {
       }
     }
   });
-
   el.answerInput.focus();
+}
+
+// init
+const init = () => {
+  // 共通初期化
+  setAnwerInput()
+  newProblem();
+  startTimer();
 }
 
 // wait DOM ready if script loaded deferred

@@ -1,7 +1,7 @@
 // (type="module")
 
 // データのフェッチ (トップレベル await を利用)
-const res = await fetch('../assets/json/kanji.json');
+const res = await fetch('../assets/json/egyptian.json');
 const data = await res.json();
 
 const container = document.getElementById('tags');
