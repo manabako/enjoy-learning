@@ -49,11 +49,33 @@ async function loadGroups() {
         if (k === 'entry') continue;
         if (Array.isArray(entry[k])) { aliasKey = k; break; }
       }
-      // fallback to 'aliases'
+      // fallback to 'aliases' if present
       if (!aliasKey && Array.isArray(entry.aliases)) aliasKey = 'aliases';
-      // if still none, skip
+      // if still none, skip this entry
       if (!aliasKey) return;
-      pool.push({ entry: entry.entry, aliases: entry[aliasKey] });
+
+      // normalize alias array so we always have an array of strings
+      const rawArr = Array.isArray(entry[aliasKey]) ? entry[aliasKey] : [];
+      const normalized = rawArr.map(a => {
+        if (typeof a === 'string') return a;
+        if (a && typeof a === 'object') {
+          // prefer common string keys if present
+          for (const key of ['jpn']) {
+            if (typeof a[key] === 'string') return a[key];
+          }
+          // fallback: first string value in the object
+          const vals = Object.values(a); const firstStr = vals.find(v => typeof v === 'string');
+          if (firstStr) return firstStr;
+          // entirely non-string object, stringify as last resort
+          try { return JSON.stringify(a); } catch(e) { return String(a); }
+        }
+        return String(a);
+      }).filter(Boolean);
+
+      // if no aliases found after normalization, fall back to the entry text itself
+      const aliases = normalized.length ? normalized : [String(entry.entry)];
+
+      pool.push({ entry: entry.entry, aliases });
     });
   });
   return pool;
