@@ -13,7 +13,7 @@ async function loadGenres() {
   function updateSelectedCount(){
     const activeBtn = container.querySelector('.tag[aria-pressed="true"]');
     const cnt = activeBtn ? Number(activeBtn.dataset.count || 0) : 0;
-    document.getElementById('selected-count').textContent = String(cnt);
+    document.getElementById('selected-count').textContent = "ペア数：" + String(cnt);
   }
 
   Array.from(genreMap.keys()).sort().forEach(genre => {
