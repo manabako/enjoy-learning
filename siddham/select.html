@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>梵字転写ゲーム — 楽しく勉強する</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/stylesheet.css" />
+    <link rel="stylesheet" href="../assets/css/siddham-select.css" />
+  </head>
+  <body>
+    <header class="site-header container" role="banner">
+      <a class="site-brand" href="../index.html">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="site-title">楽しく勉強する</span>
+      </a>
+      <nav class="site-nav" role="navigation" aria-label="主要メニュー">
+        <a href="../index.html">トップ</a>
+        <a href="../index.html#">コース</a>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <section class="mode-panel">
+        <div class="hero-card">
+          <h2 class="kicker">梵字転写ゲーム</h2>
+          <h1 class="animate-fade-up is-visible">モードを選択</h1>
+          <p class="mode-desc">モードは2つです。</p>
+        </div>
+
+        <div class="mode-row">
+          <button class="mode-card" data-level="1" aria-label="中天音">
+            <div class="mode-title">カタカナ（中天音）</div>
+            <div class="mode-desc">東密で使われる中天音による音写です。</div>
+          </button>
+
+          <button class="mode-card" data-level="3" aria-label="IAST">
+            <div class="mode-title">ラテン文字（IAST）</div>
+            <div class="mode-desc">ラテン文字転写で使われるIAST方式による音写です。</div>
+          </button>
+        </div>
+
+        <div class="small-note">選択すると自動でゲームが開始します。戻る場合はブラウザの戻るを使ってください。</div>
+      </section>
+    </main>
+
+    <footer class="site-footer container" role="contentinfo">
+      <p>© 2025 楽しく勉強する</p>
+    </footer>
+
+    <script type="module" src="../assets/js/siddham-select.js"></script>
+  </body>
+</html>
