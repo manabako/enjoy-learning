@@ -1,9 +1,10 @@
 const buttons = Array.from(document.querySelectorAll('.mode-card'));
 
 function selectLevel(level) {
-  sessionStorage.setItem('colorGameLevel', String(level));
+  const mode = String(level) === '3' ? 'iast' : 'tl';
+  sessionStorage.setItem('siddhamMode', mode);
   // navigate to game index; include param for convenience
-  location.href = `./index.html?level=${level}`;
+  location.href = `./index.html?mode=${mode}`;
 }
 
 buttons.forEach(btn => {

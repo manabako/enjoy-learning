@@ -3,4 +3,10 @@
   font-family: "Noto Sans Siddham", sans-serif;
   font-weight: 400;
   font-style: normal;
+  position: relative;
+  top: 10%;
+}
+
+.choice, .furigana {
+  font-family: sans-serif, ui-sans-serif, system-ui;
 }

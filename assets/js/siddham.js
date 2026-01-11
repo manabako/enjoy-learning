@@ -1,9 +1,19 @@
 /* siddham game (simple structure like colors.js) */
 
-const siddham_POOL = Array.from('アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンャュョァィゥェォッー');;
+// Character pools for different modes
+const SIDDHAM_POOL_TL = Array.from('アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンャュョァィゥェォッー');
+const SIDDHAM_POOL_IAST = Array.from('abcdefghijklmnopqrstuvwxyzāīūṛḷṃṅṇśṣḥ');
+let siddhamPool = SIDDHAM_POOL_TL.slice();
+
 const JSON_PATH_DEFAULT = '../assets/json/siddham.json';
 const MAX_SCALE = 4;
 const BASE_SPEED_INIT = 0.00025;
+
+// Game mode: 'tl' (katakana) or 'iast'
+let mode = 'tl';
+
+// Return the reading string for the current mode
+function getReading(entry){ if(!entry) return ''; return mode === 'iast' ? (entry.iast || entry.tl || '') : (entry.tl || entry.iast || ''); }
 
 // elements
 const el = {
@@ -45,18 +55,20 @@ function currentEntry(){ return pool[currentIndex % pool.length]; }
 
 function renderFurigana(){
   if(!el.furigana) return;
-  const r = currentEntry().tl;
-  const parts = Array.from(r).map((ch,i)=> revealed[i] ? ch : '●');
+  const r = getReading(currentEntry());
+  const chars = Array.from(r);
+  const parts = chars.map((ch,i)=> revealed[i] ? ch : '●');
   el.furigana.textContent = parts.join(' ');
-}
+} 
 
 function setChoicesForNextChar(){
   if(!el.choices) return;
   el.choices.innerHTML = '';
-  const r = currentEntry().tl;
-  if(readingPos >= r.length) return;
-  const correct = r[readingPos];
-  const dummies = sampleExcluding(siddham_POOL, [correct], 5);
+  const r = getReading(currentEntry());
+  const chars = Array.from(r);
+  if(readingPos >= chars.length) return;
+  const correct = chars[readingPos];
+  const dummies = sampleExcluding(siddhamPool, [correct], 5);
   const options = shuffle([correct, ...dummies]);
   options.forEach(opt => {
     const li = document.createElement('li');
@@ -68,12 +80,13 @@ function setChoicesForNextChar(){
     li.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); li.click(); } });
     el.choices.appendChild(li);
   });
-}
+} 
 
 function handleChoice(elm, value){
   if(paused) return;
-  const r = currentEntry().tl;
-  const correct = r[readingPos];
+  const r = getReading(currentEntry());
+  const chars = Array.from(r);
+  const correct = chars[readingPos];
   if(value === correct){
     revealed[readingPos] = true;
     renderFurigana();
@@ -82,7 +95,7 @@ function handleChoice(elm, value){
     pauseUntil = performance.now() + 1000;
     lastTime = pauseUntil;
     readingPos++;
-    if(readingPos >= r.length){
+    if(readingPos >= chars.length){
       // completed the reading
       score++;
       if(el.result) el.result.textContent = '正解！ 次の問題へ';
@@ -108,12 +121,14 @@ function handleChoice(elm, value){
     if(el.result) el.result.textContent = '違います';
     setTimeout(()=> { if(el.result && el.result.textContent === '違います') el.result.textContent = ''; }, 700);
   }
-}
+} 
 
 function startQuestion(){
   const entry = currentEntry();
   readingPos = 0;
-  revealed = Array.from({length: entry.tl.length}).map(()=>false);
+  const r = getReading(entry);
+  const chars = Array.from(r);
+  revealed = chars.map(()=>false);
   if(el.siddham) {
     el.siddham.textContent = entry.word;
     el.siddham.style.transform = `scale(${scale})`;
@@ -125,7 +140,7 @@ function startQuestion(){
   renderFurigana();
   setChoicesForNextChar();
   if(el.result) el.result.textContent = '';
-}
+} 
 
 function updateBar(){
   const pct = Math.min(1, Math.max(0, (scale - 1) / (MAX_SCALE - 1)));
@@ -135,8 +150,8 @@ function updateBar(){
 
 function gameOver(){
   paused = true;
-  const r = currentEntry().tl;
-  if(el.furigana) el.furigana.textContent = r.split('').join(' ')
+  const r = getReading(currentEntry());
+  if(el.furigana) el.furigana.textContent = Array.from(r).join(' ')
   if(rafId) cancelAnimationFrame(rafId);
   if(el.result) el.result.textContent = `終了！ 正解数: ${score}`;  // clear any pending next-question timeouts so we don't hide the restart button
   if(pendingNextTimeout){ clearTimeout(pendingNextTimeout); pendingNextTimeout = null; }  if(el.choices) Array.from(el.choices.children).forEach(c => c.classList.add('disabled'));
@@ -179,6 +194,18 @@ async function init() {
   }
   pool = data.slice();
   shuffle(pool);
+
+  // determine mode (tl or iast) from URL or sessionStorage or legacy 'level'
+  const params = new URLSearchParams(location.search);
+  let modeParam = params.get('mode') || null;
+  const levelParam = params.get('level') || sessionStorage.getItem('siddhamLevel');
+  if(!modeParam && levelParam){
+    modeParam = (String(levelParam) === '3') ? 'iast' : 'tl';
+  }
+  mode = sessionStorage.getItem('siddhamMode') || modeParam || 'tl';
+  sessionStorage.setItem('siddhamMode', mode);
+  // choose pool for choices
+  siddhamPool = (mode === 'iast') ? SIDDHAM_POOL_IAST.slice() : SIDDHAM_POOL_TL.slice();
 
   // Restart button handler (hidden during gameplay)
   if(el.restartBtn) {
