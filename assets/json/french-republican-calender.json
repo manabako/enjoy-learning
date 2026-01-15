@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1, "name": "ヴァンデミエール", "fra_name": "Vendémiaire", "jpn_name": "葡萄月", 
+    "start_month": 9, "start_day": 22, "end_month": 10, "end_day": 21
+  },
+  {
+    "id": 2, "name": "ブリュメール", "fra_name": "Brumaire", "jpn_name": "霧月", 
+    "start_month": 10, "start_day": 22, "end_month": 11, "end_day": 20
+  },
+  {
+    "id": 3, "name": "フリメール", "fra_name": "Frimaire", "jpn_name": "霜月", 
+    "start_month": 11, "start_day": 21, "end_month": 12, "end_day": 20
+  },
+  {
+    "id": 4, "name": "ニヴォーズ", "fra_name": "Nivôse", "jpn_name": "雪月", 
+    "start_month": 12, "start_day": 21, "end_month": 1, "end_day": 19
+  },
+  {
+    "id": 5, "name": "プリュヴィオーズ", "fra_name": "Pluviôse", "jpn_name": "雨月", 
+    "start_month": 1, "start_day": 20, "end_month": 2, "end_day": 18
+  },
+  {
+    "id": 6, "name": "ヴァントーズ", "fra_name": "Ventôse", "jpn_name": "風月", 
+    "start_month": 2, "start_day": 19, "end_month": 3, "end_day": 20
+  },
+  {
+    "id": 7, "name": "ジェルミナル", "fra_name": "Germinal", "jpn_name": "芽月", 
+    "start_month": 3, "start_day": 21, "end_month": 4, "end_day": 19
+  },
+  {
+    "id": 8, "name": "フロレアル", "fra_name": "Floréal", "jpn_name": "花月", 
+    "start_month": 4, "start_day": 20, "end_month": 5, "end_day": 19
+  },
+  {
+    "id": 9, "name": "プレリアル", "fra_name": "Prairial", "jpn_name": "草月", 
+    "start_month": 5, "start_day": 20, "end_month": 6, "end_day": 18
+  },
+  {
+    "id": 10, "name": "メスィドール", "fra_name": "Messidor", "jpn_name": "収穫月", 
+    "start_month": 6, "start_day": 19, "end_month": 7, "end_day": 18
+  },
+  {
+    "id": 11, "name": "テルミドール", "fra_name": "Thermidor", "jpn_name": "熱月", 
+    "start_month": 7, "start_day": 19, "end_month": 8, "end_day": 17
+  },
+  {
+    "id": 12, "name": "フリュクティドール", "fra_name": "Fructidor", "jpn_name": "実月", 
+    "start_month": 8, "start_day": 18, "end_month": 9, "end_day": 16
+  }
+]

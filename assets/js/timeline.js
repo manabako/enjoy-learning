@@ -325,7 +325,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             elements: 'elements',
             sel: 'standard-electrode-potential',
             countries: 'countries',
-            genji: 'genji-monogatari'
+            genji: 'genji-monogatari',
+            fpc: 'french-republican-calender'
         });
         const param = getJsonFileName();
         const jsonFile = contentFiles[param]; // URLパラメータから取得
