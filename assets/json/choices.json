@@ -1,0 +1,32 @@
+[
+  {
+    "questions": [
+      {"question": "高いのは？", "reverse": false}, 
+      {"question": "低いのは？", "reverse": true}
+    ],
+    "options": [
+      {"name": "エベレスト", "value": 8848},
+      {"name": "K2", "value": 8611},
+      {"name": "カンチェンジュンガ", "value": 8586},
+      {"name": "ローツェ", "value": 8516},
+      {"name": "マカルー", "value": 8463},
+      {"name": "チョ・オユー", "value": 8201},
+      {"name": "ダウラギリ", "value": 8167},
+      {"name": "マナスル", "value": 8163},
+      {"name": "ナンガ・パルバット", "value": 8126},
+      {"name": "アンナプルナ", "value": 8091}
+    ],
+    "tags": ["地理", "世界の山"]
+  },
+  {
+    "questions": [
+      {"question": "果たすのは？", "reverse": false}, 
+      {"question": "晴らすのは？", "reverse": true}
+    ],
+    "options": [
+      {"name": "雪辱", "value":1},
+      {"name": "屈辱", "value":0}
+    ],
+    "tags": ["国語", "用語法"]
+  }
+]

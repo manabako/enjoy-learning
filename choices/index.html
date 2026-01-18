@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>二者択一ゲーム</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/stylesheet.css" />
+    <link rel="stylesheet" href="../assets/css/timer.css" />
+    <link rel="stylesheet" href="../assets/css/choices.css" />
+  </head>
+  <body>
+    <header class="site-header container" role="banner">
+      <a class="site-brand" href="../index.html">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="site-title">楽しく勉強する</span>
+      </a>
+      <nav class="site-nav" role="navigation" aria-label="主要メニュー">
+        <a href="../index.html">トップ</a>
+        <a href="select.html">ジャンル選択</a>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <section class="game-panel" aria-labelledby="choices-title">
+        <h2 id="choices-title" class="sr-only">二者択一ゲーム</h2>
+
+        <div class="game-top">
+          <div class="timer" title="残り時間">
+            <div id="timer-bar" class="timer-bar"></div>
+          </div>
+          <div class="timer-label">残り <span id="time-remaining">60</span>s</div>
+        </div>
+
+        <div class="problem-area" aria-live="polite">
+          <div class="problem-number">正解数 <span id="score">0</span></div>
+          <div id="question" class="question">読み込み中…</div>
+        </div>
+
+        <div class="answer-area">
+          <ul id="choices" class="choices" role="listbox" aria-label="選択肢"></ul>
+
+          <div class="controls">
+            <button id="restart" class="btn restart" hidden>再挑戦</button>
+            <div id="result" class="result" aria-live="polite"></div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <footer class="site-footer container" role="contentinfo">
+      <p>© 2025 楽しく勉強する</p>
+    </footer>
+
+    <script type="module" src="../assets/js/choices.js"></script>
+  </body>
+</html>
