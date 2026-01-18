@@ -91,6 +91,34 @@
     "feature": { "type": "Point", "coordinates": [28.9802, 41.0085] }
   },
   {
+    "id": "leaning_tower_of_pisa",
+    "type": "point",
+    "label": "ピサの斜塔",
+    "tags": ["世界の名所", "世界遺産・構成資産"],
+    "feature": { "type": "Point", "coordinates": [10.3966, 43.7230] }
+  },
+  {
+  "id": "st_peters_basilica",
+  "type": "point",
+  "label": "サン・ピエトロ大聖堂",
+  "tags": ["世界の名所", "世界遺産・構成資産"],
+  "feature": { "type": "Point", "coordinates": [12.4533, 41.9022] }
+  },
+  {
+  "id": "angkor_wat",
+  "type": "point",
+  "label": "アンコール・ワット",
+  "tags": ["世界の名所", "世界遺産・構成資産"],
+  "feature": { "type": "Point", "coordinates": [103.8670, 13.4125] }
+  },
+  {
+  "id": "meteora",
+  "type": "point",
+  "label": "メテオラ",
+  "tags": ["世界の名所", "世界複合遺産・構成資産", "test"],
+  "feature": { "type": "Point", "coordinates": [21.6311, 39.7142] }
+  },
+  {
     "id": "united_states",
     "type": "polygon",
     "label": "アメリカ合衆国",
@@ -2218,7 +2246,7 @@
     "tags": ["首都"],
     "feature": {
       "type": "Polygon",
-      "coordinates": [[[-6.3870, 53.2450], [-6.0420, 53.2450], [-6.0420, 53.4100], [-6.3870, 53.4100], [-6.3870, 53.2450]]]
+      "coordinates": [[[-6.4479, 53.2235], [-6.0420, 53.2235], [-6.0420, 53.4255], [-6.4479, 53.4255], [-6.4479, 53.2235]]]
     }
   }
 ]
