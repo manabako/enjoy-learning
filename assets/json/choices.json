@@ -16,7 +16,7 @@
       {"name": "ナンガ・パルバット", "value": 8126},
       {"name": "アンナプルナ", "value": 8091}
     ],
-    "tags": ["地理", "世界の山"]
+    "tags": ["地理"]
   },
   {
     "questions": [
@@ -27,6 +27,117 @@
       {"name": "雪辱", "value":1},
       {"name": "屈辱", "value":0}
     ],
-    "tags": ["国語", "用語法"]
-  }
+    "tags": ["国語"]
+  },
+  {
+    "questions": [
+      {"question": "直径が大きいのは？", "reverse": false}, 
+      {"question": "直径が小さいのは？", "reverse": true}
+    ],
+    "options": [
+      {"name": "水星", "value": 4879},
+      {"name": "金星", "value": 12104},
+      {"name": "火星", "value": 6779},
+      {"name": "地球", "value": 12742},
+      {"name": "木星", "value": 139822},
+      {"name": "土星", "value": 116464},
+      {"name": "天王星", "value": 50724},
+      {"name": "海王星", "value": 49244},
+      {"name": "冥王星", "value": 2376},
+      {"name": "月", "value": 3475}
+    ],
+    "tags": ["天文"]
+  },
+  {
+    "questions": [
+      {"question": "面積が大きいのは？", "reverse": false}, 
+      {"question": "面積が小さいのは？", "reverse": true}
+    ],
+    "options": [
+      {"name": "ロシア", "value": 17098242},
+      {"name": "カナダ", "value": 9984670},
+      {"name": "中国", "value": 9596961},
+      {"name": "アメリカ合衆国", "value": 9372610},
+      {"name": "ブラジル", "value": 8515767},
+      {"name": "オーストラリア", "value": 7692024},
+      {"name": "インド", "value": 3287263},
+      {"name": "アルゼンチン", "value": 2780400},
+      {"name": "カザフスタン", "value": 2724900},
+      {"name": "アルジェリア", "value": 2381741}
+    ],
+    "tags": ["地理"]
+  },
+  {
+    "questions": [
+      {"question": "長いのは？", "reverse": false}, 
+      {"question": "短いのは？", "reverse": true}
+    ],
+    "options": [
+      {"name": "ナイル川", "value": 6650},
+      {"name": "アマゾン川", "value": 6400},
+      {"name": "長江", "value": 6300},
+      {"name": "ミシシッピ川", "value": 6275},
+      {"name": "黄河", "value": 5464},
+      {"name": "オビ川", "value": 5410},
+      {"name": "コンゴ川", "value": 4700},
+      {"name": "アムール川", "value": 4444},
+      {"name": "レナ川", "value": 4400},
+      {"name": "メコン川", "value": 4350}
+    ],
+    "tags": ["地理"]
+  },
+  {
+    "questions": [
+      {"question": "速いのは？", "reverse": false}, 
+      {"question": "遅いのは？", "reverse": true}
+    ],
+    "options": [
+      {"name": "チーター", "value": 120},
+      {"name": "ライオン", "value": 80},
+      {"name": "グリズリー", "value": 56},
+      {"name": "シマウマ", "value": 65},
+      {"name": "カンガルー", "value": 71},
+      {"name": "アフリカゾウ", "value": 40},
+      {"name": "キリン", "value": 60},
+      {"name": "コアラ", "value": 30},
+      {"name": "ナマケモノ", "value": 0.27}
+    ],
+    "tags": ["動物"]
+  },
+  {
+    "questions": [
+      {"question": "重いのは？", "reverse": false}, 
+      {"question": "軽いのは？", "reverse": true}
+    ],
+    "options": [
+      {"name": "アフリカゾウ", "value": 6000},
+      {"name": "シロナガスクジラ", "value": 150000},
+      {"name": "キリン", "value": 1200},
+      {"name": "ホッキョクグマ", "value": 700},
+      {"name": "ライオン", "value": 190},
+      {"name": "グリズリー", "value": 270},
+      {"name": "チーター", "value": 72},
+      {"name": "カンガルー", "value": 85},
+      {"name": "シマウマ", "value": 380},
+      {"name": "コアラ", "value": 15}
+    ],
+    "tags": ["動物"]
+  },
+  {
+    "questions": [
+      {"question": "深いのは？", "reverse": false}, 
+      {"question": "浅いのは？", "reverse": true}
+    ],
+    "options": [
+      {"name": "マリアナ海溝", "value": 10983},
+      {"name": "トンガ海溝", "value": 10882},
+      {"name": "フィリピン海溝", "value": 10540},
+      {"name": "ペルー・チリ海溝", "value": 8065},
+      {"name": "ジャワ海溝", "value": 7725},
+      {"name": "日本海溝", "value": 8020},
+      {"name": "ケルマデック海溝", "value": 10047},
+      {"name": "アリューシャン海溝", "value": 7822}
+    ],
+    "tags": ["地理"]
+  }  
 ]
