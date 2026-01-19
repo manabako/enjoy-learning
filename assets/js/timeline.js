@@ -326,7 +326,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             sel: 'standard-electrode-potential',
             countries: 'countries',
             genji: 'genji-monogatari',
-            fpc: 'french-republican-calender'
+            fpc: 'french-republican-calender',
+            edosho: 'syogun-edo',
+            mursho: 'syogun-muromachi',
+            kamsho: 'syogun-kamakura'
         });
         const param = getJsonFileName();
         const jsonFile = contentFiles[param]; // URLパラメータから取得
