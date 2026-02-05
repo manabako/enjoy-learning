@@ -234,5 +234,82 @@
         "jpn": ["即興曲"]
       }
     ]
+  },
+  {
+    "genre": "イギリス英語とアメリカ英語",
+    "group": [
+      {
+        "entry": "biscuit",
+        "us": ["cookie"]
+      },
+      {
+        "entry": "trainers",
+        "us": ["sneakers"]
+      },
+      {
+        "entry": "jumper",
+        "us": ["sweater"]
+      },
+      {
+        "entry": "trousers",
+        "us": ["pants"]
+      },
+      {
+        "entry": "chemist",
+        "us": ["drug store"]
+      },
+      {
+        "entry": "cinema",
+        "us": ["movie theater"]
+      },
+      {
+        "entry": "flat",
+        "us": ["apartment"]
+      },
+      {
+        "entry": "off license",
+        "us": ["liquor store"]
+      },
+      {
+        "entry": "underground",
+        "us": ["subway"]
+      },
+      {
+        "entry": "lift",
+        "us": ["elevator"]
+      },
+      {
+        "entry": "motorway",
+        "us": ["highway"]
+      },
+      {
+        "entry": "petrol",
+        "us": ["gas"]
+      },
+      {
+        "entry": "torch",
+        "us": ["flashlight"]
+      },
+      {
+        "entry": "tap",
+        "us": ["faucet"]
+      },
+      {
+        "entry": "queue",
+        "us": ["line"]
+      },
+      {
+        "entry": "football",
+        "us": ["soccer"]
+      },
+      {
+        "entry": "autumn",
+        "us": ["fall"]
+      },
+      {
+        "entry": "first floor",
+        "us": ["second floor"]
+      }
+    ]
   }
 ]
